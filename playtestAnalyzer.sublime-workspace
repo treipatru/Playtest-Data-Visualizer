@@ -39,23 +39,18 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1975,
+				"buffer_size": 1977,
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "//SELECT TIMEFRAME AND LOAD UP THE DATA\n///////////////////////////////////////////////////////////////////////////////\n$(function() {\n	$( \"#datePickStart\" ).datepicker({\n		minDate: new Date(2014, 9 - 1),\n		maxDate: new Date(2015, 4 - 1),\n		dateFormat: 'yy-mm-dd'});\n});\n\n$(function() {\n	$( \"#datePickEnd\" ).datepicker({\n		minDate: new Date(2014, 9 - 1),\n		maxDate: new Date(2015, 4 - 1),\n		dateFormat: 'yy-mm-dd'});\n});\n\nfunction loadDateValues () {\n	oStartDate = $( \"#datePickStart\" ).datepicker( \"getDate\" );\n	oEndDate = $( \"#datePickEnd\" ).datepicker( \"getDate\" );\n}\n\n$(function(){\n  $(\"#dataValidation\").click(function(){\n   loadDateValues();\n\n   if (oStartDate === null || oEndDate === null) {\n   	$(\"#debug\").text(\"You must select both dates if you want to load the files.\");\n   	return;\n   } else {\n   	//Go through the dates between the START and END create an array with all dates\n   	var oCurrentDate = new Date(oStartDate);\n	var aDatesList = [];	\n    while (oCurrentDate <= oEndDate) {\n        aDatesList.push(new Date(oCurrentDate));\n        oCurrentDate.setDate(oCurrentDate.getDate() + 1);\n    }\n    for (i = 0; i < aDatesList.length; i++) {\n    	aDatesList[i] = $.datepicker.formatDate (\"yy-mm-dd\", aDatesList[i]);\n    }\n   	$(\"#debug\").text(\"Start:\" + aDatesList[0] + \" | \"+ \"End:\" + aDatesList[aDatesList.length-1]);\n   	$(\"#dataOutput\").text(aDatesList.toString());\n    //Import all\n\n   }\n  });\n});",
 			"file": "js/main.js",
+			"file_size": 1399,
+			"file_write_time": 130618526286155982,
 			"settings":
 			{
-				"buffer_size": 1399,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/+cache/jquery-ui-1.11.2/index.html",
-			"settings":
-			{
-				"buffer_size": 31712,
+				"buffer_size": 1417,
 				"line_ending": "Unix"
 			}
 		}
@@ -172,9 +167,7 @@
 	},
 	"expanded_folders":
 	[
-		"/D/+cache/initializr",
-		"/D/+cache/initializr/css",
-		"/D/+cache/initializr/js"
+		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer"
 	],
 	"file_history":
 	[
@@ -244,7 +237,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -253,15 +246,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1975,
+						"buffer_size": 1977,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								525,
-								525
+								823,
+								823
 							]
 						],
 						"settings":
@@ -271,10 +264,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -283,55 +276,28 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1399,
+						"buffer_size": 1417,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								648,
-								648
+								890,
+								890
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/D/+cache/jquery-ui-1.11.2/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 31712,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
