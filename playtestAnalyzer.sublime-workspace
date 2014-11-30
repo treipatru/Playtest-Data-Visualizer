@@ -1,0 +1,426 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"getDate"
+			],
+			[
+				"selection",
+				"selectionEndDate"
+			],
+			[
+				"selectio",
+				"selectionStartDate"
+			],
+			[
+				"gender",
+				"gender"
+			],
+			[
+				"JSON",
+				"JSONObject"
+			],
+			[
+				"JS",
+				"JSONObject"
+			],
+			[
+				"po",
+				"proto	Prototype"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 1975,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 1399,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/+cache/jquery-ui-1.11.2/index.html",
+			"settings":
+			{
+				"buffer_size": 31712,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/node.sublime-build",
+	"command_palette":
+	{
+		"height": 196.0,
+		"selected_items":
+		[
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"hint",
+				"JSHint: Set Linting Preferences"
+			],
+			[
+				"jshin",
+				"JSHint"
+			],
+			[
+				"js",
+				"JSHint"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"case",
+				"Convert Case: Title Case"
+			],
+			[
+				"caps",
+				"Convert Case: Upper Case"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sidebar",
+				"View: Toggle Side Bar"
+			],
+			[
+				"sideb",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"syntax java",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/+cache/initializr",
+		"/D/+cache/initializr/css",
+		"/D/+cache/initializr/js"
+	],
+	"file_history":
+	[
+		"/D/+cache/jquery-ui-1.11.2/index.html",
+		"/D/+cache/initializr/css/main.css",
+		"/D/+cache/initializr/js/main.js",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/server/json.txt",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/server/index.html",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/local/index.html",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/json.txt",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/local/peopleGen.js",
+		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
+		"/C/Users/Andrei34/Documents/GitHub/peoplegen/docs/data structure.graphml",
+		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/User/node.sublime-build",
+		"/D/06.sync/google drive/!var/!jscript/peopleGen/js/peopleGen.js",
+		"/D/06.sync/google drive/!var/!jscript/peopleGen/index.html",
+		"/D/06.sync/google drive/!var/!jscript/peopleGen/data.json",
+		"/D/06.sync/google drive/!var/!jscript/peopleGen/data.xml",
+		"/D/06.sync/google drive/!var/!jscript/peopleGen/docs/data.xlsx",
+		"/D/06.sync/google drive/!var/!jscript/testproj/index.html",
+		"/D/06.sync/google drive/!var/!jscript/exercises.js",
+		"/D/06.sync/google drive/!var/!jscript/arraysort.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"datepicker",
+			"article",
+			"dataSource",
+			"loadJSON",
+			"object",
+			"typePercentage",
+			"randomPossibility",
+			"lastName",
+			"        ",
+			"([A-Z])([A-Z]+)\\b"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"nameSource",
+			"$1\\L$2"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1975,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								525,
+								525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1399,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								648,
+								648
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/+cache/jquery-ui-1.11.2/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 31712,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 219.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "playtestAnalyzer.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"data.xml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 190.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
