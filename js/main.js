@@ -29,7 +29,8 @@ $(function(){
    } else {
    	//Go through the dates between the START and END create an array with all dates
    	var oCurrentDate = new Date(oStartDate);
-	var aDatesList = [];	
+    var aDatesList = [];	
+
     while (oCurrentDate <= oEndDate) {
         aDatesList.push(new Date(oCurrentDate));
         oCurrentDate.setDate(oCurrentDate.getDate() + 1);
@@ -37,8 +38,30 @@ $(function(){
     for (i = 0; i < aDatesList.length; i++) {
     	aDatesList[i] = $.datepicker.formatDate ("yy-mm-dd", aDatesList[i]);
     }
-   	$("#debug").text("Start:" + aDatesList[0] + " | "+ "End:" + aDatesList[aDatesList.length-1]);
-   	$("#dataOutput").text(aDatesList.toString());
+   	
+var aFileListInput = []; //used for compared list of files,
+
+    //Load all data files from the server into an array. Filelist is generated server-side.
+    $.get("data/filelist.txt", function(data) {
+      var aPlaytestFiles = []; //used to import all files on server
+      
+
+      aPlaytestFiles = data.split('\n');
+
+      for (var i = 0; i < aPlaytestFiles.length; i ++) {
+        var sCompareDateFile = aPlaytestFiles[i].slice(0,10);
+        for (var j = 0; j < aDatesList.length; j++) {
+          var sCompareDateInput = aDatesList[j].slice(0,10);
+          if (sCompareDateFile === sCompareDateInput) {
+            aFileListInput.push (aPlaytestFiles[i]);
+        }
+      }
+    }
+      console.log(aFileListInput);
+    });
+    
+    // $("#debug").text("Start:" + aDatesList[0] + " | "+ "End:" + aDatesList[aDatesList.length-1]);
+   	// $("#dataOutput").text(aDatesList.toString());
    }
   });
 });

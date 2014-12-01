@@ -4,142 +4,251 @@
 		"selected_items":
 		[
 			[
-				"get",
-				"getDate"
+				"sprsJob",
+				"sPrsJobTitle"
 			],
 			[
-				"selection",
-				"selectionEndDate"
+				"SprsJo",
+				"sPrsJobTitle"
 			],
 			[
-				"selectio",
-				"selectionStartDate"
+				"sPrsJ",
+				"sPrsJobCat"
 			],
 			[
-				"gender",
-				"gender"
+				"sPrsJo",
+				"sPrsJobTitle"
 			],
 			[
-				"JSON",
-				"JSONObject"
+				"generateJ",
+				"generateJobTitle"
 			],
 			[
-				"JS",
-				"JSONObject"
+				"name",
+				"namePackImport"
 			],
 			[
-				"po",
-				"proto	Prototype"
+				"sPrs",
+				"sPrsGender"
+			],
+			[
+				"gene",
+				"generateJob"
+			],
+			[
+				"random",
+				"randomSelector"
+			],
+			[
+				"nameP",
+				"namePackImport"
+			],
+			[
+				"nameCont",
+				"NameContainer"
+			],
+			[
+				"namePack",
+				"namePackImport"
+			],
+			[
+				"sPrsF",
+				"sPrsFullName"
+			],
+			[
+				"AJA",
+				"AJAX_JSON_Req"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"person",
+				"person2"
+			],
+			[
+				"object",
+				"object2"
+			],
+			[
+				"obj",
+				"object1"
+			],
+			[
+				"generate",
+				"generateId"
+			],
+			[
+				"first",
+				"firstName"
+			],
+			[
+				"rnd",
+				"rnd2"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"rand",
+				"randomInterval"
+			],
+			[
+				"age",
+				"sAgeBracket"
+			],
+			[
+				"aAge",
+				"aAgeBracketWeight"
+			],
+			[
+				"weigh",
+				"weightedRandom"
+			],
+			[
+				"aValu",
+				"aValuesWeight"
+			],
+			[
+				"a",
+				"aValues"
+			],
+			[
+				"avalues",
+				"aValuesWeight"
+			],
+			[
+				"aVa",
+				"aValuesWeight"
+			],
+			[
+				"aValues",
+				"aValuesWeight"
+			],
+			[
+				"genera",
+				"generateAge"
+			],
+			[
+				"sPerson",
+				"sPersonLastName"
+			],
+			[
+				"sPersonF",
+				"sPersonFirstName"
+			],
+			[
+				"sPer",
+				"sPersonLastName"
+			],
+			[
+				"sS",
+				"sSubjectFullName"
+			],
+			[
+				"sSubjec",
+				"sSubjectLastName"
+			],
+			[
+				"sSubj",
+				"sSubjectLastName"
+			],
+			[
+				"fo",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"f",
+				"for	for (…) {…}"
+			],
+			[
+				"choi",
+				"choice2"
+			],
+			[
+				"ch",
+				"choice1"
+			],
+			[
+				"t",
+				"test"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "index.html",
-			"settings":
-			{
-				"buffer_size": 1977,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "//SELECT TIMEFRAME AND LOAD UP THE DATA\n///////////////////////////////////////////////////////////////////////////////\n$(function() {\n	$( \"#datePickStart\" ).datepicker({\n		minDate: new Date(2014, 9 - 1),\n		maxDate: new Date(2015, 4 - 1),\n		dateFormat: 'yy-mm-dd'});\n});\n\n$(function() {\n	$( \"#datePickEnd\" ).datepicker({\n		minDate: new Date(2014, 9 - 1),\n		maxDate: new Date(2015, 4 - 1),\n		dateFormat: 'yy-mm-dd'});\n});\n\nfunction loadDateValues () {\n	oStartDate = $( \"#datePickStart\" ).datepicker( \"getDate\" );\n	oEndDate = $( \"#datePickEnd\" ).datepicker( \"getDate\" );\n}\n\n$(function(){\n  $(\"#dataValidation\").click(function(){\n   loadDateValues();\n\n   if (oStartDate === null || oEndDate === null) {\n   	$(\"#debug\").text(\"You must select both dates if you want to load the files.\");\n   	return;\n   } else {\n   	//Go through the dates between the START and END create an array with all dates\n   	var oCurrentDate = new Date(oStartDate);\n	var aDatesList = [];	\n    while (oCurrentDate <= oEndDate) {\n        aDatesList.push(new Date(oCurrentDate));\n        oCurrentDate.setDate(oCurrentDate.getDate() + 1);\n    }\n    for (i = 0; i < aDatesList.length; i++) {\n    	aDatesList[i] = $.datepicker.formatDate (\"yy-mm-dd\", aDatesList[i]);\n    }\n   	$(\"#debug\").text(\"Start:\" + aDatesList[0] + \" | \"+ \"End:\" + aDatesList[aDatesList.length-1]);\n   	$(\"#dataOutput\").text(aDatesList.toString());\n    //Import all\n\n   }\n  });\n});",
-			"file": "js/main.js",
-			"file_size": 1399,
-			"file_write_time": 130618526286155982,
-			"settings":
-			{
-				"buffer_size": 1417,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/User/node.sublime-build",
 	"command_palette":
 	{
-		"height": 196.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
-				"java",
-				"Set Syntax: JavaScript"
-			],
-			[
-				"remove",
-				"Package Control: Remove Package"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
-			],
-			[
-				"linter",
-				"SublimeLinter: Show All Errors"
-			],
-			[
-				"jsh",
-				"JSHint"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
-			],
-			[
-				"package",
-				"Package Control: Remove Package"
-			],
-			[
-				"hint",
-				"JSHint: Set Linting Preferences"
-			],
-			[
-				"jshin",
-				"JSHint"
-			],
-			[
-				"js",
-				"JSHint"
-			],
-			[
-				"javasc",
-				"Set Syntax: JavaScript"
-			],
-			[
-				"case",
-				"Convert Case: Title Case"
-			],
-			[
-				"caps",
-				"Convert Case: Upper Case"
+				"html",
+				"Set Syntax: HTML"
 			],
 			[
 				"json",
 				"Set Syntax: JSON"
 			],
 			[
-				"xml",
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"theme",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"c#",
+				"Set Syntax: C#"
+			],
+			[
+				"linter sett",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"style",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"XML",
 				"Set Syntax: XML"
 			],
 			[
-				"html",
-				"Set Syntax: HTML"
+				"java",
+				"Set Syntax: JavaScript"
 			],
 			[
 				"word",
 				"Word Wrap: Toggle"
 			],
 			[
-				"sidebar",
-				"View: Toggle Side Bar"
-			],
-			[
-				"sideb",
-				"View: Toggle Open Files in Side Bar"
+				"c",
+				"Set Syntax: C#"
 			],
 			[
 				"syntax java",
@@ -150,7 +259,7 @@
 	},
 	"console":
 	{
-		"height": 146.0,
+		"height": 126.0,
 		"history":
 		[
 			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
@@ -167,30 +276,51 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer"
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/js"
 	],
 	"file_history":
 	[
-		"/D/+cache/jquery-ui-1.11.2/index.html",
-		"/D/+cache/initializr/css/main.css",
-		"/D/+cache/initializr/js/main.js",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/server/json.txt",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/server/index.html",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/local/index.html",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/json.txt",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/local/peopleGen.js",
-		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
-		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
-		"/C/Users/Andrei34/Documents/GitHub/peoplegen/docs/data structure.graphml",
-		"/C/Users/Andrei34/AppData/Roaming/Sublime Text 3/Packages/User/node.sublime-build",
-		"/D/06.sync/google drive/!var/!jscript/peopleGen/js/peopleGen.js",
-		"/D/06.sync/google drive/!var/!jscript/peopleGen/index.html",
-		"/D/06.sync/google drive/!var/!jscript/peopleGen/data.json",
-		"/D/06.sync/google drive/!var/!jscript/peopleGen/data.xml",
-		"/D/06.sync/google drive/!var/!jscript/peopleGen/docs/data.xlsx",
-		"/D/06.sync/google drive/!var/!jscript/testproj/index.html",
-		"/D/06.sync/google drive/!var/!jscript/exercises.js",
-		"/D/06.sync/google drive/!var/!jscript/arraysort.js"
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/index.html",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/testindex.html",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/js/playtestanalysis.js",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/css/jquery-ui.css",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/js/testresults.txt",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/js/papaparse.js",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/template.html",
+		"/C/Users/GA Instructor/GitHub/playtestanalyzer/help.html",
+		"/C/Users/GA Instructor/GitHub/peoplegen/docs/temp.js",
+		"/C/Users/GA Instructor/Desktop/2014-06-28_23-13-49.mlx",
+		"/C/Users/GA Instructor/Desktop/sg-shows-export.json",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/local/index.html",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/local/TEST.html",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/local/peopleGen.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/local/peopleGen.js.v1",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/server/peopleGenJSON.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/server/index.html",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/server/nonNativeNames.json",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/server/testjs.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/docs/data.xlsx",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/test.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/index.html",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/nonNativeNames.json",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/peopleGenJSON.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/peopleGen.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/peopleGen/js/peopleGen.js",
+		"/C/Users/GA Instructor/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/GA Instructor/AppData/Roaming/Sublime Text 3/Packages/User/node.sublime-build",
+		"/C/Users/GA Instructor/Desktop/test.xml",
+		"/C/Users/GA Instructor/Desktop/index.html",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/arraysort.js",
+		"/C/Users/GA Instructor/Google Drive/!var/!jscript/funlibrary.js",
+		"/Z/Instructor/gaserver-backup/scripts/academy-backup-svn.sh",
+		"/Z/Instructor/gaserver-backup/scripts/academy-backup-all.sh",
+		"/Z/Instructor/gaserver-backup/scripts/academy-backup-svn.sh.save",
+		"/C/Users/GA Instructor/SVN/team110/CurseOfMermos/Assets/CME/Playgrounds/Moodie/Scripts/PlayerController.cs",
+		"/C/Users/GA Instructor/SVN/team110/CurseOfMermos/Assets/CME/Playgrounds.meta",
+		"/C/Users/GA Instructor/SVN/team110/CurseOfMermos/Assets/CME.meta",
+		"/C/Users/GA Instructor/SVN/team110/CurseOfMermos/Assets/CME/Playgrounds/Mouza/m_Enemy_Test.mat",
+		"/C/Users/GA Instructor/SVN/team110/CurseOfMermos/Library/MonoManager.asset"
 	],
 	"find":
 	{
@@ -208,25 +338,56 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"datepicker",
-			"article",
-			"dataSource",
-			"loadJSON",
-			"object",
-			"typePercentage",
-			"randomPossibility",
+			"CsvToJson",
+			"Papa.parse",
+			");\n",
+			"iGenderSelector",
+			"NameContainer",
+			"oIdCard",
+			"\"\"lastName\"\"",
+			"\"\"firstNameFemale\"\"",
+			"\"\"firstNameMale\"\"",
 			"lastName",
-			"        ",
-			"([A-Z])([A-Z]+)\\b"
+			"firstNameFemale",
+			"firstNameMale",
+			"iPersonAge",
+			"sPersonFullName",
+			"sPersonLastName",
+			"sPersonFirstName",
+			"{};\n",
+			"sPersonType",
+			"*** NEW ***",
+			"iMlFmRandom",
+			"subject",
+			"sSubjectFullName",
+			"sSubjectLastName",
+			"sSubjectFirstName",
+			"sSubjectType",
+			"Things"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
-			"nameSource",
-			"$1\\L$2"
+			"DataPack",
+			"\"lastName\"",
+			"\"firstNameFemale\"",
+			"\"firstNameMale\"",
+			"\"lastName\"",
+			"\"firstNameFemale\"",
+			"\"firstNameMale\"",
+			"iPrsAge",
+			"sPrsFullName",
+			"sPrsLastName",
+			"sPrsFirstName",
+			"sPrsType",
+			"",
+			"iGenderSelector",
+			"sPersonFullName",
+			"sPersonFirstName",
+			"sPersonType"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -237,79 +398,18 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1977,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								823,
-								823
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "js/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								890,
-								890
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 216.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 23.0
 	},
 	"input":
 	{
-		"height": 34.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -336,7 +436,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 219.0
+		"height": 203.0
 	},
 	"output.find_results":
 	{
@@ -345,7 +445,7 @@
 	"project": "playtestAnalyzer.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 86.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -354,8 +454,12 @@
 		"selected_items":
 		[
 			[
-				"",
-				"data.xml"
+				"people",
+				"local\\peopleGen.js"
+			],
+			[
+				"player",
+				"Assets\\CME\\Playgrounds\\Moodie\\Scripts\\PlayerController.cs"
 			]
 		],
 		"width": 0.0
@@ -381,10 +485,10 @@
 	{
 	},
 	"show_minimap": true,
-	"show_open_files": true,
+	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 190.0,
+	"side_bar_width": 232.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
