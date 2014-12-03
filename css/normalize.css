@@ -130,11 +130,12 @@ h1 {
 
 h2 {
     font-size: 1.5em;
-    margin: 0.83em 0;
+    margin: 0.4em 0.2em;
 }
 
 h3 {
     font-size: 1.17em;
+    color: #E74C3C;
     margin: 1em 0;
 }
 
@@ -150,7 +151,7 @@ h5 {
 
 h6 {
     font-size: 0.67em;
-    margin: 2.33em 0;
+    margin: 0em 0;
 }
 
 /**
@@ -208,7 +209,7 @@ mark {
 
 p,
 pre {
-    margin: 1em 0;
+    margin: 0.5em 0;
 }
 
 /**

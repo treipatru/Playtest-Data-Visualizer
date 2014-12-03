@@ -5,13 +5,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/jquery-1.11.1.min.js"></script>
         <script src="js/vendor/jquery-ui.js"></script>
-        <script src="js/vendor/highcharts-all.js"></script>
+        <script src="js/vendor/chart.js"></script>
         <script src="js/main.js"></script>
 
   <script>
@@ -22,12 +22,14 @@
     <body>
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title">Playtest Data</h1>
+                <h2 class="title">Playtest Data</h2>
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="#">Help</a></li>
-                        <li><a href="http://gaserver/cgi-bin/updatefiles.cgi">Index Files</a></li>
+                        <li><a href="#" id="reIndex">Re-Index</a></li>
+                        <!-- <input type="button" id="reIndex" value="Open Confirm Dialog" /> -->
+                        <div id="confirmationDialog"></div>
                     </ul>
                 </nav>
             </header>
@@ -38,27 +40,22 @@
 
                 <article>
                     <section>
-                        <h2>Select Data</h2>
-                        <p>Start Date: <input type="text" id="datePickStart"></p>
-                        <p>End Date: <input type="text" id="datePickEnd"></p>
+                        <h3>Select Time Frame</h3>
+                        <input type="text" id="datePickStart" placeholder="Start Date">
+                        <input type="text" id="datePickEnd" placeholder="End Date">
                         <button type="button" id="dataValidation">Load Data</button>
+                        <p style="display: inline;" id="debug"></p>
+                        <hr>
                     </section>
-                        <section>
-                        <h2>Display Data</h2>
-                        <p id="dataOutput"></p>
-                        <div id="chart" style="width:100%; height:1000px;color:black;"></div>
+                    <section>
+                    <canvas id="myChart" width="400" height="400"></canvas>
                     </section>
                 </article>
-
-                <aside>
-                    <h3>Debug</h3>
-                    <p id="debug">Nothing loaded yet!</p>
-                </aside>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
         <div class="footer-container">
         <footer class="wrapper">
-        <h3>footer</h3>
+        <h6>Playtest Data Viewer - Curse of Mermos - Gaming Academy 2014 </h6>
         </footer>
         </div>
     </body>

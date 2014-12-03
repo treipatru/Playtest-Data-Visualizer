@@ -63,6 +63,7 @@ textarea {
 
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    background: #ECF0F1;;
 }
 
 .wrapper {
@@ -75,18 +76,18 @@ body {
    =================== */
 
 .header-container {
-    border-bottom: 20px solid #e44d26;
+    border-bottom: 10px solid #2980B9;
 }
 
 .footer-container,
 .main aside {
-    border-top: 20px solid #e44d26;
+    border-top: 5px solid #2980B9;
 }
 
 .header-container,
 .footer-container,
 .main aside {
-    background: #f16529;
+    background: #2C3E50;
 }
 
 .title {
@@ -111,8 +112,8 @@ nav a {
     text-decoration: none;
     font-weight: bold;
 
-    color: white;
-    background: #e44d26;
+    color: #ECF0F1;
+    background: #2980B9;
 }
 
 nav a:hover,
@@ -142,8 +143,10 @@ nav a:hover {
 }
 
 .footer-container footer {
-    color: white;
-    padding: 20px 0;
+    color: #FAFEFF;
+    text-align: center;
+    font-weight: normal;
+    /*font-size: 0.7em;*/
 }
 
 /* ===============
@@ -160,7 +163,18 @@ nav a:hover {
 
 
 
-
+input[type="text"] {
+  margin: 0;
+  width: 25%;
+  padding-right: 10px; 
+  font-family: sans-serif;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}
 
 
 
@@ -185,8 +199,8 @@ nav a:hover {
     nav a {
         float: left;
         width: 27%;
-        margin: 0 1.7%;
-        padding: 25px 2%;
+        margin: 0 1%;
+        padding: 10px 2%;
         margin-bottom: 0;
     }
 
@@ -234,7 +248,7 @@ nav a:hover {
  
     nav {
         float: right;
-        width: 38%;
+        width: 30%;
     }
 
 /* ============
@@ -243,12 +257,12 @@ nav a:hover {
 
     .main article {
         float: left;
-        width: 67%;
+        width: 100%;
     }
 
     .main aside {
         float: right;
-        width: 18%;
+        width: 20%;
     }
 }
 
