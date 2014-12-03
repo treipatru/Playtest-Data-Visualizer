@@ -1,5 +1,5 @@
 //GLOBAL VARIABLES
-var aFileListInput = []; //
+var aFileListInput = [];
 var completeData = [];
 var completeDataLoaded = false;
 
@@ -31,7 +31,7 @@ $(function(){
    loadDateValues();
 
    if (oStartDate === null || oEndDate === null) {
-   	$("#debug").text("You must select both dates if you want to load the files.");
+   	$("#debug").text("You must select two dates to validate.");
    	return;
    } else {
    	//Go through the dates between the START and END create an array with all dates
@@ -45,7 +45,7 @@ $(function(){
     for (i = 0; i < aDatesList.length; i++) {
     	aDatesList[i] = $.datepicker.formatDate ("yy-mm-dd", aDatesList[i]);
     }
-   	
+
     //Load all data files from the server into an array. Filelist is generated server-side.
     $.get("data/filelist.txt", function(data) {
       var aPlaytestFiles = []; //used to import all files on server    
@@ -64,7 +64,7 @@ $(function(){
 
     if (completeDataLoaded === true) {
       $("#debug").text("Data loaded!");
-      displayCharts();
+      // displayCharts(); Enable charts after data has been loaded. Function not defined yet.
     }
 
     });
@@ -85,12 +85,6 @@ function importToObject () {
   completeDataLoaded = true;
 }
 
-$(function(){
-  $("#dataDisplay").click(function(){
-    
-  });
-});
-
 
 // EXPERIMENTAL SHIZZLE
 // {
@@ -110,38 +104,41 @@ $(function(){
 //     "Time":["28", "40", "150", "170"]
 // }
 
-function displayCharts () {
-  $(document).ready(function() {
-  var chart1title = "Waves Finished";
-  var chart1Categories = ['Wave Number'];
 
-    for (i=0; i<chart1Categories.length; i++) {
-      chart1Categories[i] = String(chart1Categories[i]);
-    }
+//MODAL DIALOGUE BOX
+function openNormalDialog() {
+    $("#confirmationDialog").html("Are you sure you want to re-index the data? Make sure you have the correct files in the savedata folder before proceeding!");
 
-     var chart1 = new Highcharts.Chart({
-        chart: {
-            renderTo: 'chart',
-            type: 'bar'
-        },
-        title: {
-            text: chart1title
-        },
-        xAxis: {
-            categories: chart1Categories
-        },
-        yAxis: {
-            title: {
-                text: 'Attacks Performed'
+    // Define the Dialog and its properties.
+    $("#confirmationDialog").dialog({
+        resizable: false,
+        modal: true,
+        title: "Re-Index",
+        height: 250,
+        width: 450,
+        buttons: {
+            "Yes": function () {
+                $(this).dialog('close');
+                callback(true);
+            },
+                "No": function () {
+                $(this).dialog('close');
+                callback(false);
             }
-        },
-        series: [{
-            name: 'Melee',
-            data: [1, 0, 4]
-        }, {
-            name: 'Ranged',
-            data: [2, 7, 5]
-        }]
+        }
     });
+}
+
+
+$( document ).ready(function() {
+  $('#reIndex').click(openNormalDialog);
 });
+
+
+function callback(value) {
+    if (value) {
+        window.location.href='http://gaserver/cgi-bin/updatefiles.cgi';
+    } else {
+        return;
+    }
 }
