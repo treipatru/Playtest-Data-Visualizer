@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"chart",
+				"chartWaveCompletion"
+			],
+			[
 				"font",
 				"font-size"
 			],
@@ -55,14 +59,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "index.html",
-			"settings":
-			{
-				"buffer_size": 2362,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "Packages/User/node.sublime-build",
 	"command_palette":
@@ -178,12 +174,13 @@
 	[
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer",
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/css",
-		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/js",
-		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/js/vendor"
+		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/js"
 	],
 	"file_history":
 	[
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/js/main.js",
+		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/index.html",
+		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/data/2014-11-30-786ghl3b50c-Game-10.JSON",
 		"/C/Users/Andrei34/Desktop/test/index.html",
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/css/normalize.css",
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/css/main.css",
@@ -191,7 +188,6 @@
 		"/C/Users/Andrei34/AppData/Local/Temp/7zE1460.tmp/bootstrap-theme.css",
 		"/C/Users/Andrei34/AppData/Local/Temp/7zE460C.tmp/bootstrap.css",
 		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/js/vendor/chart.js",
-		"/C/Users/Andrei34/Documents/GitHub/playtestanalyzer/index.html",
 		"/D/+cache/jquery-ui-1.11.2/index.html",
 		"/D/+cache/initializr/css/main.css",
 		"/D/+cache/initializr/js/main.js",
@@ -229,6 +225,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"displayCharts",
+			"CHART",
 			"footer",
 			"displayCharts",
 			"completeDataLoaded",
@@ -281,39 +279,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2362,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								712,
-								712
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
