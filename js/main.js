@@ -311,61 +311,49 @@ $(function(){
     });
 });
    //Display Chart #4
-    $(function () {
-        $('#chartAttackTypesPerWave').highcharts({
-            chart: {
-                type: 'area'
-            },
+$(function () {
+    $('#chartAttackTypesPerWave').highcharts({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Attacks Used'
+        },
+        subtitle: {
+            text: 'Averaged from all selected play sessions'
+        },
+        xAxis: {//Total Number of Waves
+            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30']
+        },
+        yAxis: {
             title: {
-                text: 'Attacks Distribution'
-            },
-            subtitle: {
-                text: 'Averaged from all selected play sessions'
-            },
-            xAxis: {
-                categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
-                tickmarkPlacement: 'on',
-                title: {
-                    enabled: false
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Percent'
-                }
-            },
-            tooltip: {
-                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.0f}%</b> ({point.y:,.0f} hits)<br/>',
-                shared: true
-            },
-            plotOptions: {
-                area: {
-                    stacking: 'percent',
-                    lineColor: '#ffffff',
-                    lineWidth: 1,
-                    marker: {
-                        lineWidth: 1,
-                        lineColor: '#ffffff'
-                    }
-                }
-            },
-            series: [{//Each number is an average calculated per wave from all data sources
-                name: 'Melee',
-                data: [178,177,156,134,173,122,138,157,172,164,171,157,107,187,185,166,147,171,122,147,141,131,176,137,100,139,144,234,100,168]
-            }, {
-                name: 'Charged Melee',
-                data: [0,0,0,0,0,0,34,27,34,34,17,27,33,39,31,34,31,37,32,29,20,30,26,32,26,36,26,36,25,27]
-            }, {
-                name: 'Range',
-                data: [58,89,84,52,94,132,113,78,78,67,89,78,133,114,120,71,82,67,79,69,78,125,118,102,87,131,76,73,129,68]
-            }, {
-                name: 'Charged Range',
-                data: [0,0,0,0,0,0,0,0,0,56,49,45,68,57,42,56,61,53,52,59,54,53,49,62,47,55,60,60,65,66]
-            }]
-        });
+                text: 'No Of Uses'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{//Each number is an average calculated per wave from all data sources
+            name: 'Melee',
+            data: [178,177,156,134,173,122,138,157,172,164,171,157,107,187,185,166,147,171,122,147,141,131,176,137,100,139,144,234,100,168]
+        }, {
+            name: 'Charged Melee',
+            data: [32,21,20,33,36,30,34,27,34,34,17,27,33,39,31,34,31,37,32,29,20,30,26,32,26,36,26,36,25,27]
+        }, {
+            name: 'Range',
+            data: [58,89,84,52,94,132,113,78,78,67,89,78,133,114,120,71,82,67,79,69,78,125,118,102,87,131,76,73,129,68]
+        }, {
+            name: 'Charged Range',
+            data: [53,65,73,63,80,54,67,64,74,56,49,45,68,57,42,56,61,53,52,59,54,53,49,62,47,55,60,60,65,66]
+        }
+        ]
     });
-
-
+});
    //End Display Charts
  });
 });

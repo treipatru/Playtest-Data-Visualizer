@@ -59,14 +59,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "js/main.js",
-			"settings":
-			{
-				"buffer_size": 10975,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "Packages/User/node.sublime-build",
 	"command_palette":
@@ -287,39 +279,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "js/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10975,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9591,
-								9591
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 112.0,
-						"translation.y": 5763.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
