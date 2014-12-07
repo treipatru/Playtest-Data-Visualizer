@@ -179,13 +179,6 @@ input[type="text"]:focus {
 
 
 
-
-
-
-
-
-
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -198,10 +191,11 @@ input[type="text"]:focus {
 
     nav a {
         float: left;
-        width: 27%;
+        width: 19%;
         margin: 0 1%;
         padding: 10px 2%;
         margin-bottom: 0;
+        font-size: 0.8em;
     }
 
     nav li:first-child a {
@@ -248,7 +242,7 @@ input[type="text"]:focus {
  
     nav {
         float: right;
-        width: 30%;
+        width: 40%;
     }
 
 /* ============
