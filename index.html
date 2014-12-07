@@ -13,6 +13,7 @@
         <script src="js/vendor/jquery-ui.js"></script>
         <script src="js/highcharts/highcharts.js"></script>
         <script src="js/highcharts/modules/exporting.js"></script>
+        <script src="js/highcharts/modules/heatmap.js"></script>
         <script src="js/highcharts/themes/grid-light.js"></script>
         <script src="js/main.js"></script>
 
@@ -20,13 +21,13 @@
     <body>
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h2 class="title">Playtest Data</h2>
+                <h1 class="title">Playtest Data</h1>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Multi View</a></li>
+                        <li><a href="#">Single View</a></li>
                         <li><a href="#">Help</a></li>
                         <li><a href="#" id="reIndex">Re-Index</a></li>
-                        <!-- <input type="button" id="reIndex" value="Open Confirm Dialog" /> -->
                         <div id="confirmationDialog"></div>
                     </ul>
                 </nav>
@@ -47,13 +48,50 @@
                         <hr>
                     </section>
                 </article>
-                <article>
+
+                <article id="dataNotLoaded">
+                </article>
+
+                <article style="display:none" id="allCharts">
                     <section>
-                    <div id="chartWalkingStrafing" style="width:100%; height:400px;"></div>
-                    <div id="chartAttackTypesPerWave" style="width:100%; height:400px;"></div>
-                    <div id="chartAttackTypes" style="width:100%; height:400px;"></div>
-                    <div id="chartWaveCompletion" style="width:100%; height:400px;"></div>
+                    <h2 id="gameCompletionTitle">Game Completion</h2>
+                    <div id="chartWaveCompletion" style="width:100%; height:300px;"></div>
+                    <div id="chartWaveCompletionAvg">
+                        <p>Shortest game was X waves while the longest game was Y waves.</p>
+                        <p>The average game is ended at wave Z.</p>
+                    </div>
+                    <div id="chartWaveTime" style="width:100%; height:300px;"></div>
+                    <div id="chartGameTime">
+                        <p>Fastest wave was completed in X while longest wave took Y.</p>
+                        <p>It takes an average of Z seconds to finish a wave.</p>
+                        <br>
+                    </div>
+                    </section>
+                    <hr>
+                    <section>
+                    <h2 id="combatStatisticsTitle">Combat Statistics</h2>
+                    <div id="chartAttackTypes" style="width:50%; height:300px;float:left"></div>
+                    <div id="chartWalkingStrafing" style="width:50%; height:300px;float:right"></div>
+                    <div id="chartAttackTypesPerWave" style="width:100%; height:400px;clear:both;"></div>
+                    </section>
+                    <hr>
+                    <section>
+                    <h2 id="healthProgressionTitle">Health Progression</h2>
+                    </section>
+                    <hr>
+                    <section>
+                    <h2 id="collectiblesTitle">Collectibles</h2>
                     <div id="chartSoulsCollection" style="width:100%; height:400px;"></div>
+                    <div id="chartShardsCollection" style="width:100%; height:400px;"></div>
+                    </section>
+                    <hr>
+                    <section>
+                    <h2 id="shopTitle">Shop</h2>
+                    </section>
+                    <hr>
+                    <section>
+                    <h2 id="mapTitle">Map</h2>
+                    <div id="chartMapHeatMap" style="width:100%; height:400px;"></div>
                     </section>
                 </article>
             </div> <!-- #main -->
