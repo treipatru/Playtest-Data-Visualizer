@@ -5,18 +5,18 @@
 
 // Load the fonts
 Highcharts.createElement('link', {
-	href: 'http://fonts.googleapis.com/css?family=Dosis:400,600',
+	href: 'http://fonts.googleapis.com/css?family=Open+Sans:300,400',
 	rel: 'stylesheet',
 	type: 'text/css'
 }, null, document.getElementsByTagName('head')[0]);
 
 Highcharts.theme = {
-	colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-		"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+	colors: ["#4D4D4D", "#5DA5DA", "#FAA43A", "#60BD68", "#F17CB0", "#B2912F", "#B276B2",
+		"#DECF3F", "#F15854", "#6A833D", "#CDC4D2", "#76D39C", "#C99337", "#B0787B", "#A1D749"],
 	chart: {
 		backgroundColor: null,
 		style: {
-			fontFamily: "Dosis, sans-serif"
+			fontFamily: "Open Sans, sans-serif"
 		}
 	},
 	title: {
@@ -28,13 +28,13 @@ Highcharts.theme = {
 	},
 	tooltip: {
 		borderWidth: 0,
-		backgroundColor: 'rgba(219,219,216,0.8)',
+		backgroundColor: 'rgba(150,150,150,0.8)',
 		shadow: false
 	},
 	legend: {
 		itemStyle: {
 			fontWeight: 'bold',
-			fontSize: '13px'
+			fontSize: '11px'
 		}
 	},
 	xAxis: {
