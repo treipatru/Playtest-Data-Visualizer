@@ -27,8 +27,8 @@
                 <h1 class="title">Playtest Data</h1>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Multi View</a></li>
-                        <li><a href="#">Single View</a></li>
+                        <li><a href="index.html">Report</a></li>
+                        <li><a href="#">Single</a></li>
                         <li><a href="#">Help</a></li>
                         <li><a href="#" id="reIndex">Re-Index</a></li>
                         <div id="confirmationDialog"></div>
@@ -47,7 +47,7 @@
                         <input type="text" id="datePickEnd" placeholder="End Date">
                         <button type="button" id="dataValidation">Load Data</button>
                         <button type="button" id="showCharts">Show Charts</button>
-                        <p style="display: inline;" id="debug"></p>
+                        <div id="debug"style="display: inline;"></div>
                         <hr>
                     </section>
                 </article>
@@ -77,12 +77,15 @@
                     <hr>
                     <section>
                     <h2 id="healthProgressionTitle">Health Progression</h2>
+                    <div id="chartHealthPlot" style="width:100%; height:400px;"></div>
+                    <div id="chartHealthAveragePotionsRevives" style="width:100%; height:400px;"></div>
                     </section>
                     <hr>
                     <section>
                     <h2 id="collectiblesTitle">Collectibles</h2>
                     <div id="chartSoulsCollection" style="width:100%; height:400px;"></div>
                     <div id="chartShardsCollection" style="width:100%; height:400px;"></div>
+                    <div id="chartAverageSoulsShards" style="width:100%; height:400px;"></div>
                     </section>
                     <hr>
                     <section>
