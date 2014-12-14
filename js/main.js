@@ -71,6 +71,10 @@ function callback(value) {
 // TOGGLE ON/OFF CHARTS SECTIONS
 //-----------------------------------------------------------------------------
 $(function(){
+    $("#debug").click(function(){
+        $("#fileList").slideToggle("fast");
+    });
+    
     $("#gameCompletionTitle").click(function(){
         $("#chartWaveCompletion").slideToggle("fast");
         $("#chartWaveCompletionAvg").slideToggle("fast");
@@ -112,7 +116,32 @@ var oEndDate; //date variable for the END datepicker
 var aFileListInput = []; //array with exact names of files to be imported
 var aDatesList = []; //array with all the days between start and end dates
 var aPlaytestFiles = []; //used to import all files on server
-var aCompleteData = []; //array 
+var aCompleteData = []; //array containing all imported objects
+
+
+// GRAPH ACCESSIBLE DATA
+//-----------------------------------------------------------------------------
+
+
+//GAME COMPLETION
+var aDataIds = []; //all loaded games
+var aDataWaveCompletion = []; //waves completed per games in aDataIds
+var iDataMaxWave = 0; //highest completed wave
+var aDataMaxWave = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30', 'W31', 'W32', 'W33', 'W34', 'W35', 'W36', 'W37', 'W38', 'W39', 'W40']; //list of completed waves
+var aDataElapsedTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataElapsedTimeAvg = 0;
+var aDataStrafeTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataStrafeTimeAvg = 0;
+iDataWalkTimeAvg = 0;
+var aDataElapsedWaveCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataAttMelee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataAttMeleeCh = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataAttRange = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataAttRangeCh = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataAttMeleeAvg = 0;
+var iDataAttMeleeChAvg = 0;
+var iDataAttRangeAvg = 0;
+var iDataAttRangeChAvg = 0;
 
 //#############################################################################
 // DEFINE FUNCTIONS TO BE CALLED WHEN PROGRAM IS INITIALIZED
@@ -183,9 +212,86 @@ function fParseFilelist () {
 // COMPUTE DATA REQUIRED FOR CHARTS
 //-----------------------------------------------------------------------------
 function fCrunchData () {
-    //GAME COMPLETION
 
+    //GAME COMPLETION - WAVES COMPLETED PER GAME
+    for (var i = 0; i < aCompleteData.length; i++) {
+        //GET GAME IDS
+        aDataIds.push(aCompleteData[i].id);
+        //GET NO OF COMPLETED WAVE/ID
+        aDataWaveCompletion[i] = aCompleteData[i].waveNo.length;
+        //GET HIGHEST COMPLETED WAVE NUMBER
+        var tempWave = getMaxOfArray(aCompleteData[i].waveNo);
+        if (tempWave > iDataMaxWave) {
+            iDataMaxWave = tempWave;
+        }
+        //GET AVERAGE TIME ELAPSED PER WAVE AND OCCURENCES OF WAVES
+        for (j = 0; j < aCompleteData[i].elapsedTime.length; j++) {
+            aDataElapsedWaveCount[j] += 1;
+            aDataElapsedTime[j] += aCompleteData[i].elapsedTime[j];
+            aDataStrafeTime[j] += aCompleteData[i].strafeTime[j];
+        }
+
+        //GET CUMULATED NUMER OF ATTACKS PER WAVES
+        for (j = 0; j < aCompleteData[i].melee.length; j++) {
+            aDataAttMelee[j] += aCompleteData[i].melee[j];
+            aDataAttMeleeCh[j] += aCompleteData[i].meleeCh[j];
+            aDataAttRange[j] += aCompleteData[i].range[j];
+            aDataAttRangeCh[j] += aCompleteData[i].rangeCh[j];
+        }
+
+        
+    }
+    //UPDATE ARRAY WITH HIGHEST COMPLETED WAVE NUMBER
+    aDataMaxWave = aDataMaxWave.slice(0, iDataMaxWave);
+
+    //CALCULATE THE AVERAGE TIME ELAPSED PER WAVE
+    aDataElapsedTime = aDataElapsedTime.slice(0, iDataMaxWave);
+
+    aDataElapsedWaveCount = aDataElapsedWaveCount.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataElapsedTime.length; i++) {
+        aDataElapsedTime[i] = Math.floor(aDataElapsedTime[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //CALCULATE THE AVERAGE STRAFE TIME OVERALL
+    aDataStrafeTime = aDataStrafeTime.slice(0, iDataMaxWave);
+    iDataStrafeTimeAvg = Math.floor(Math.average.apply (Math, aDataStrafeTime));
+    iDataElapsedTimeAvg = Math.floor(Math.average.apply (Math, aDataElapsedTime));
+    iDataWalkTimeAvg = iDataElapsedTimeAvg - iDataStrafeTimeAvg;
+
+    //CALCULATE THE AVERAGE ATTACKS PER WAVE
+    aDataAttMelee = aDataAttMelee.slice(0, iDataMaxWave);
+    aDataAttMeleeCh = aDataAttMeleeCh.slice(0, iDataMaxWave);
+    aDataAttRange = aDataAttRange.slice(0, iDataMaxWave);
+    aDataAttRangeCh = aDataAttRangeCh.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataElapsedTime.length; i++) {
+        aDataAttMelee[i] = Math.floor(aDataAttMelee[i] / aDataElapsedWaveCount[i]);
+        aDataAttMeleeCh[i] = Math.floor(aDataAttMeleeCh[i] / aDataElapsedWaveCount[i]);
+        aDataAttRange[i] = Math.floor(aDataAttRange[i] / aDataElapsedWaveCount[i]);
+        aDataAttRangeCh[i] = Math.floor(aDataAttRangeCh[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //CALCULATE THE OVERALL AVERAGE ATTACKS USED
+    iDataAttMeleeAvg = Math.floor(Math.average.apply (Math, aDataAttMelee));
+    iDataAttMeleeChAvg = Math.floor(Math.average.apply (Math, aDataAttMeleeCh));
+    iDataAttRangeAvg = Math.floor(Math.average.apply (Math, aDataAttRange));
+    iDataAttRangeChAvg = Math.floor(Math.average.apply (Math, aDataAttRangeCh));
+
+    //DEBUG
+    console.log(aCompleteData);
 }
+
+function getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
+}
+
+Math.average = function() {
+    var cnt, tot, i;
+    cnt = arguments.length;
+    tot = i = 0;
+    while (i < cnt) tot+= arguments[i++];
+    return tot / cnt;
+};
+
 
 // DEBUG - CHECK IF DATA IS LOADED AND NOTIFY THE USER
 //-----------------------------------------------------------------------------
@@ -196,7 +302,8 @@ function fOutputLog (situation) {
     } else if (situation === "nodataloaded") {
         $("#debug").html("<p style=\"display: inline;color: red;\">" + "No data was loaded!" + "</p>");
     } else if (situation === "dataloadsuccessful") {
-       $("#debug").html("<p style=\"display: inline;color: blue;\">" + aCompleteData.length + " data sets loaded!" + "</p>"); 
+       $("#debug").html("<p style=\"display: inline;color: blue;\">" + aCompleteData.length + " data sets loaded!" + "</p>");
+       $("#fileList").html("<p style=\"display: inline;color: grey;\">" + aFileListInput + "</p>");
     }
 }
 
