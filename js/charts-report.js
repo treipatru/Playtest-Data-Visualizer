@@ -11,7 +11,6 @@ $(function(){
   $("#showCharts").click(function(){
      $("#allCharts").show();
 
-
 //#############################################################################
 // GAME COMPLETION
 //#############################################################################
@@ -31,7 +30,7 @@ $('#chartWaveCompletion').highcharts({
         enabled: false
     },
         xAxis: { //List of all loaded FILES
-            categories: ['Game01','Game02','Game03','Game04','Game05','Game06','Game07','Game08','Game09','Game10','Game11','Game12','Game13','Game14','Game15','Game16','Game17','Game18','Game19','Game20','Game21','Game22']
+            categories: aDataIds
         },
         yAxis: {
             min: 0,
@@ -56,7 +55,7 @@ $('#chartWaveCompletion').highcharts({
         },
         series: [{ //Length(+1) of Waves array for each loaded file
             name: 'Completed ',
-            data: [2,17,16,4,9,18,8,24,21,14,11,7,30,19,8, 15, 20, 11, 7, 10, 23, 21, 24, 9, 26]
+            data: aDataWaveCompletion
 
         }]
     });
@@ -89,10 +88,10 @@ $(function () {
         series: [{
             name: 'Players / Wave',
             data: [
-            ['W01-10', 245],
-            ['W11-20', 187],
-            ['W21-29', 95],
-            ['W30', 30]
+            ['W01-10', 50],
+            ['W11-20', 50],
+            ['W21-29', 200],
+            ['W30', 1000]
             ]
         }]
     });
@@ -112,7 +111,7 @@ $('#chartWaveTime').highcharts({
         enabled: false
     },
         xAxis: { //List of Max number of waves
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30']
+            categories: aDataMaxWave
         },
         yAxis: {
             min: 0,
@@ -123,7 +122,7 @@ $('#chartWaveTime').highcharts({
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y} seconds</b></td></tr>',
+            '<td style="padding:0"><b> {point.y} seconds</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -135,8 +134,8 @@ $('#chartWaveTime').highcharts({
             }
         },
         series: [{ //Average of time elapsed of all waves/objects
-            name: 'Time Elapsed ',
-            data: [5,28,36,45,48,53,58,58,63,80,86,92,117,119,120,132,144,166,166,181,193,204,212,237,247,291,292,299,314,390]
+            name: 'Time Elapsed',
+            data: aDataElapsedTime
 
         }]
     });
@@ -180,14 +179,14 @@ $(function () {
             name: 'Attack Type',
             innerSize: '0%',
             data: [ //Add each type of attack and assign it to lower values - percentage coversion is automatic
-            ['Melee', 35],
-            ['Ch.Melee', 5],
-            ['Range', 15],
-            ['Ch.Range', 25],
+            ['Melee', iDataAttMeleeAvg],
+            ['Ch.Melee', iDataAttMeleeChAvg],
+            ['Range', iDataAttRangeAvg],
+            ['Ch.Range', iDataAttRangeChAvg],
             ]
         }]
     });
-});   
+});
 
 // IN-GAME MOVEMENT
 //-----------------------------------------------------------------------------
@@ -221,8 +220,8 @@ $(function () {
             type: 'pie',
             name: 'Seconds spent',
             data: [
-                ['Walking',   160],//Average Elapsed time - strafing time
-                ['Strafing',   90]//Average Strafe Time
+                ['Walking', iDataWalkTimeAvg],
+                ['Strafing', iDataStrafeTimeAvg]
                 ]
             }]
         });
@@ -242,7 +241,7 @@ $(function () {
             text: 'Averaged from all selected play sessions'
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
+            categories: aDataMaxWave,
             tickmarkPlacement: 'on',
             title: {
                 enabled: false
@@ -270,16 +269,16 @@ $(function () {
         },
             series: [{//Each number is an average calculated per wave from all data sources
                 name: 'Melee',
-                data: [178,177,156,134,173,122,138,157,172,164,171,157,107,187,185,166,147,171,122,147,141,131,176,137,100,139,144,234,100,168]
+                data: aDataAttMelee
             }, {
                 name: 'Charged Melee',
-                data: [0,0,0,0,0,0,34,27,34,34,17,27,33,39,31,34,31,37,32,29,20,30,26,32,26,36,26,36,25,27]
+                data: aDataAttMeleeCh
             }, {
                 name: 'Range',
-                data: [58,89,84,52,94,132,113,78,78,67,89,78,133,114,120,71,82,67,79,69,78,125,118,102,87,131,76,73,129,68]
+                data: aDataAttRange
             }, {
                 name: 'Charged Range',
-                data: [0,0,0,0,0,0,0,0,0,56,49,45,68,57,42,56,61,53,52,59,54,53,49,62,47,55,60,60,65,66]
+                data: aDataAttRangeCh
             }]
         });
 });
@@ -376,7 +375,7 @@ $(function () {
             text: 'Average HP Lost Per Wave VS Use Of Potions And Revives'
         },
         xAxis: [{
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
+            categories: aDataMaxWave,
         }],
         yAxis: [{ // Primary yAxis
             labels: {
@@ -460,7 +459,7 @@ $(function () {
             text: null
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30']
+            categories: aDataMaxWave
         },
         yAxis: {
             min: 0,
@@ -654,7 +653,7 @@ $(function () {
             x: -20
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30']
+            categories: aDataMaxWave
         },
         yAxis: {
             min: 0,
@@ -698,7 +697,7 @@ $(function () {
             text: 'Averaged per wave from all selected data'
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
+            categories: aDataMaxWave,
             title: {
                 text: null
             },
@@ -768,7 +767,7 @@ $(function () {
             text: 'Averaged per wave from all selected data'
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
+            categories: aDataMaxWave,
             title: {
                 text: null
             },            
@@ -848,7 +847,7 @@ $(function () {
             text: 'All items bought from all selected data'
         },
         xAxis: {
-            categories: ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30'],
+            categories: aDataMaxWave,
             title: {
                 text: null
             },
@@ -930,7 +929,7 @@ $(function () {
         },
 
         yAxis: {
-            categories: ['W01','W02','W03','W04','W05', 'W06', 'W07','W08'],
+            categories: aDataMaxWave,
             title: null
         },
 
