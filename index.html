@@ -46,9 +46,9 @@
                         <input type="text" id="datePickStart" placeholder="Start Date">
                         <input type="text" id="datePickEnd" placeholder="End Date">
                         <button type="button" id="dataValidation">Load Data</button>
-                        <button type="button" id="showCharts">Show Charts</button>
                         <div id="debug"></div>
                         <div id="fileList"></div>
+                        <button type="button" id="showCharts" class="hidden" style="width:100%">Show Charts</button>
                         <hr>
                     </section>
                 </article>
@@ -59,8 +59,8 @@
                     <div id="chartWaveCompletion" style="width:100%; height:300px;"></div>
                     <div id="chartWavePyramid" style="width:50%; height:400px;float:right;"></div>
                     <div id="chartWaveCompletionAvg" style="width:50%; height:400px;float:left;">
-                        <p>Shortest game was X waves while the longest game was Y waves.</p>
-                        <p>The average game is ended at wave Z.</p>
+                        <p id="textGameLength"></p>
+                        <p id="textGameAverage"></p>
                     </div>
                     <div id="chartWaveTime" style="width:100%; height:300px;clear:both;"></div>
                     <div id="gameTimeStatistics">
