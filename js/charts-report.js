@@ -9,7 +9,11 @@
 
 $(function(){
   $("#showCharts").click(function(){
-     $("#allCharts").show();
+    $("#fileList").slideToggle("fast");
+    $("#showCharts").hide();
+    $("#textGameLength").text("Shortest game was " + iDataShortestGame + " waves while the longest game was " + iDataLongestGame + " waves.");
+    $("#textGameAverage").text("The average game is ended at wave " + iDataAverageWaveTime + ".");
+    $("#allCharts").show();
 
 //#############################################################################
 // GAME COMPLETION
@@ -88,10 +92,13 @@ $(function () {
         series: [{
             name: 'Players / Wave',
             data: [
-            ['W01-10', 50],
-            ['W11-20', 50],
-            ['W21-29', 200],
-            ['W30', 1000]
+            ['W01-05', iDataGameCompleteT1],
+            ['W06-10', iDataGameCompleteT2],
+            ['W11-15', iDataGameCompleteT3],
+            ['W16-20', iDataGameCompleteT4],
+            ['W21-25', iDataGameCompleteT5],
+            ['W25-29', iDataGameCompleteT6],
+            ['W30+', iDataGameCompleteT7],
             ]
         }]
     });
@@ -218,7 +225,7 @@ $(function () {
         },
         series: [{
             type: 'pie',
-            name: 'Seconds spent',
+            name: 'Time spent',
             data: [
                 ['Walking', iDataWalkTimeAvg],
                 ['Strafing', iDataStrafeTimeAvg]
