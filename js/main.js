@@ -132,7 +132,7 @@ var aDataElapsedTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 var iDataElapsedTimeAvg = 0;
 var aDataStrafeTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var iDataStrafeTimeAvg = 0;
-iDataWalkTimeAvg = 0;
+var iDataWalkTimeAvg = 0;
 var aDataElapsedWaveCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var aDataAttMelee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var aDataAttMeleeCh = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -142,6 +142,17 @@ var iDataAttMeleeAvg = 0;
 var iDataAttMeleeChAvg = 0;
 var iDataAttRangeAvg = 0;
 var iDataAttRangeChAvg = 0;
+var aDataGameLengths = []; //list of game lengths
+var iDataShortestGame = 0; //fewest no of waves completed
+var iDataLongestGame = 0; //biggest no of waves completed
+var iDataAverageWaveTime = 0; //average no of waves completed
+var iDataGameCompleteT1 = 0; //completed wave 01-05
+var iDataGameCompleteT2 = 0; //completed wave 06-10
+var iDataGameCompleteT3 = 0; //completed wave 11-15
+var iDataGameCompleteT4 = 0; //completed wave 16-20
+var iDataGameCompleteT5 = 0; //completed wave 21-25
+var iDataGameCompleteT6 = 0; //completed wave 25-29
+var iDataGameCompleteT7 = 0; //completed wave 30
 
 //#############################################################################
 // DEFINE FUNCTIONS TO BE CALLED WHEN PROGRAM IS INITIALIZED
@@ -231,6 +242,9 @@ function fCrunchData () {
             aDataStrafeTime[j] += aCompleteData[i].strafeTime[j];
         }
 
+        //GET ARRAY OF COMPLETED GAMES PER OBJECT
+        aDataGameLengths.push(aCompleteData[i].waveNo.length);
+
         //GET CUMULATED NUMER OF ATTACKS PER WAVES
         for (j = 0; j < aCompleteData[i].melee.length; j++) {
             aDataAttMelee[j] += aCompleteData[i].melee[j];
@@ -250,6 +264,51 @@ function fCrunchData () {
     aDataElapsedWaveCount = aDataElapsedWaveCount.slice(0, iDataMaxWave);
     for (i = 0; i < aDataElapsedTime.length; i++) {
         aDataElapsedTime[i] = Math.floor(aDataElapsedTime[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //CALCULATE THE LONGEST, SHORTEST AND AVERAGE NO OF WAVES COMPLETED
+    iDataLongestGame = getMaxOfArray(aDataGameLengths);
+    iDataShortestGame = getMinOfArray(aDataGameLengths);
+    iDataAverageWaveTime = Math.floor (Math.average.apply (Math, aDataGameLengths));
+
+    //CALCULATE PYRAMID DATA - WHERE USERS STOP PLAYING
+    for (i = 0; i < aDataWaveCompletion.length; i++) {
+        if (aDataWaveCompletion[i] <= 5) {
+            iDataGameCompleteT1 ++;
+        } else if (aDataWaveCompletion[i] <= 10) {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+        } else if (aDataWaveCompletion[i] <= 15) {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+            iDataGameCompleteT3 ++;
+        } else if (aDataWaveCompletion[i] <= 20) {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+            iDataGameCompleteT3 ++;
+            iDataGameCompleteT4 ++;
+        } else if (aDataWaveCompletion[i] <= 25) {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+            iDataGameCompleteT3 ++;
+            iDataGameCompleteT4 ++;
+            iDataGameCompleteT5 ++;
+        } else if (aDataWaveCompletion[i] <= 29) {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+            iDataGameCompleteT3 ++;
+            iDataGameCompleteT4 ++;
+            iDataGameCompleteT5 ++;
+            iDataGameCompleteT6 ++;
+        } else {
+            iDataGameCompleteT1 ++;
+            iDataGameCompleteT2 ++;
+            iDataGameCompleteT3 ++;
+            iDataGameCompleteT4 ++;
+            iDataGameCompleteT5 ++;
+            iDataGameCompleteT6 ++;
+            iDataGameCompleteT7 ++;
+        }
     }
 
     //CALCULATE THE AVERAGE STRAFE TIME OVERALL
@@ -284,6 +343,10 @@ function getMaxOfArray(numArray) {
     return Math.max.apply(null, numArray);
 }
 
+function getMinOfArray(numArray) {
+    return Math.min.apply(null, numArray);
+}
+
 Math.average = function() {
     var cnt, tot, i;
     cnt = arguments.length;
@@ -304,6 +367,7 @@ function fOutputLog (situation) {
     } else if (situation === "dataloadsuccessful") {
        $("#debug").html("<p style=\"display: inline;color: blue;\">" + aCompleteData.length + " data sets loaded!" + "</p>");
        $("#fileList").html("<p style=\"display: inline;color: grey;\">" + aFileListInput + "</p>");
+       $('#showCharts').removeClass('hidden');
     }
 }
 
