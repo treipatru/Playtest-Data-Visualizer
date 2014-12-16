@@ -122,18 +122,25 @@ var aCompleteData = []; //array containing all imported objects
 // GRAPH ACCESSIBLE DATA
 //-----------------------------------------------------------------------------
 
-
-//GAME COMPLETION
+//GENERAL DATA
 var aDataIds = []; //all loaded games
+var bTextOverflowProtection = true;
 var aDataWaveCompletion = []; //waves completed per games in aDataIds
 var iDataMaxWave = 0; //highest completed wave
 var aDataMaxWave = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30', 'W31', 'W32', 'W33', 'W34', 'W35', 'W36', 'W37', 'W38', 'W39', 'W40']; //list of completed waves
+//TIME DATA
 var aDataElapsedTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-var iDataElapsedTimeAvg = 0;
-var aDataStrafeTime = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataElapsedTimeObject = [];
+var iDataElapsedTime = 0;
+var aDataStrafeTimeObject = [];
 var iDataStrafeTimeAvg = 0;
 var iDataWalkTimeAvg = 0;
 var aDataElapsedWaveCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataShortestWave = 0;
+var iDataLongestWave = 0;
+var iDataAverageGameTimeS = 0;
+var iDataAverageGameTimeM = 0;
+//ATTACK DATA
 var aDataAttMelee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var aDataAttMeleeCh = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var aDataAttRange = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -145,7 +152,7 @@ var iDataAttRangeChAvg = 0;
 var aDataGameLengths = []; //list of game lengths
 var iDataShortestGame = 0; //fewest no of waves completed
 var iDataLongestGame = 0; //biggest no of waves completed
-var iDataAverageWaveTime = 0; //average no of waves completed
+var iDataAverageGameLength = 0; //average no of waves completed
 var iDataGameCompleteT1 = 0; //completed wave 01-05
 var iDataGameCompleteT2 = 0; //completed wave 06-10
 var iDataGameCompleteT3 = 0; //completed wave 11-15
@@ -153,6 +160,11 @@ var iDataGameCompleteT4 = 0; //completed wave 16-20
 var iDataGameCompleteT5 = 0; //completed wave 21-25
 var iDataGameCompleteT6 = 0; //completed wave 25-29
 var iDataGameCompleteT7 = 0; //completed wave 30
+var aDataHealthWaveGame = []; //objects for HighCharts scatter plot (health lost/wave)
+var aDataSoulsWaveGame = []; //objects for HighCharts scatter plot (% of souls collected/wave)
+var aDataSoulsWaveAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //average souls collection per waves in all objects
+var aDataShardsWaveGame = []; //objects for HighCharts scatter plot (% of shards collected/wave)
+var aDataShardsWaveAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //average shard collection per waves in all objects
 
 //#############################################################################
 // DEFINE FUNCTIONS TO BE CALLED WHEN PROGRAM IS INITIALIZED
@@ -235,26 +247,82 @@ function fCrunchData () {
         if (tempWave > iDataMaxWave) {
             iDataMaxWave = tempWave;
         }
-        //GET AVERAGE TIME ELAPSED PER WAVE AND OCCURENCES OF WAVES
-        for (j = 0; j < aCompleteData[i].elapsedTime.length; j++) {
+        //USE LENGTH OF WAVES PLAYED TO GO THROUGH OBJECT PROPERTIES CONTENTS
+        for (j = 0; j < aCompleteData[i].waveNo.length; j++) {
+            //GET TOTAL TOTAL NUMBER OF WAVES
             aDataElapsedWaveCount[j] += 1;
+            //GET TOTAL ELAPSED TIME PER WAVE
             aDataElapsedTime[j] += aCompleteData[i].elapsedTime[j];
-            aDataStrafeTime[j] += aCompleteData[i].strafeTime[j];
-        }
-
-        //GET ARRAY OF COMPLETED GAMES PER OBJECT
-        aDataGameLengths.push(aCompleteData[i].waveNo.length);
-
-        //GET CUMULATED NUMER OF ATTACKS PER WAVES
-        for (j = 0; j < aCompleteData[i].melee.length; j++) {
+            //GET CUMULATED NUMER OF ATTACKS PER WAVES
             aDataAttMelee[j] += aCompleteData[i].melee[j];
             aDataAttMeleeCh[j] += aCompleteData[i].meleeCh[j];
             aDataAttRange[j] += aCompleteData[i].range[j];
             aDataAttRangeCh[j] += aCompleteData[i].rangeCh[j];
         }
 
-        
-    }
+        //GET LONGEST AND SHORTEST WAVE TIMES FOR ALL OBJECTS LOADED
+        var tempHighest = getMaxOfArray(aCompleteData[i].elapsedTime);
+        if (tempHighest > iDataLongestWave) {iDataLongestWave = tempHighest;}
+        var tempLowest = getMinOfArray(aCompleteData[i].elapsedTime);
+        if (tempLowest > iDataShortestWave) {iDataShortestWave = tempLowest;}
+
+        //GET AVERAGE ELAPSED TIME AND STRAFE TIME PER OBJECT
+         var tempStrafeAverage = Math.floor(Math.average.apply (Math, aCompleteData[i].strafeTime));
+         var tempElapsedAverage = Math.floor(Math.average.apply (Math, aCompleteData[i].elapsedTime));
+         aDataElapsedTimeObject.push (tempElapsedAverage);
+         aDataStrafeTimeObject.push (tempStrafeAverage);
+
+
+        //GET ARRAY OF COMPLETED GAMES PER OBJECT
+        aDataGameLengths.push(aCompleteData[i].waveNo.length);
+
+
+        //GET ARRAY OF HEALTH LOST PER WAVE PER EACH OBJECT
+        var tempHealthDataMacro = [];
+        for (j = 0; j <aCompleteData[i].waveNo.length; j++ ) {
+            var tempHealthDataMicro = [];
+            tempHealthDataMicro.push(aCompleteData[i].waveNo[j]);
+            tempHealthDataMicro.push(aCompleteData[i].healthLost[j]);
+            tempHealthDataMacro.push(tempHealthDataMicro);
+        }
+        aDataHealthWaveGame[i] = {};
+        aDataHealthWaveGame[i].name = aCompleteData[i].id;
+        aDataHealthWaveGame[i].color = 'rgba(223, 83, 83, .5)';
+        aDataHealthWaveGame[i].data = tempHealthDataMacro;
+
+        //GET ARRAY OF PERCENTAGE OF SOULS COLLECTED PER WAVE PER EACH OBJECT
+        var tempSoulsMacro = [];
+        for (j = 0; j<aCompleteData[i].waveNo.length; j++) {
+            var tempSoulsMicro = [];
+            var tempSoulsPercent = Math.floor((aCompleteData[i].soulsCol[j] / aCompleteData[i].soulsDrop[j]) * 100);
+            if (aCompleteData[i].soulsCol[j] === 0 || aCompleteData[i].soulsDrop[j] === 0) {tempSoulsPercent = 0;}
+            tempSoulsMicro.push(aCompleteData[i].waveNo[j]);
+            tempSoulsMicro.push(tempSoulsPercent);
+            tempSoulsMacro.push(tempSoulsMicro);
+        }
+        aDataSoulsWaveGame[i] = {};
+        aDataSoulsWaveGame[i].name = aCompleteData[i].id;
+        aDataSoulsWaveGame[i].color = 'rgba(83, 83, 223, .5)';
+        aDataSoulsWaveGame[i].data = tempSoulsMacro;
+
+        //GET ARRAY OF PERCENTAGE OF SHARDS COLLECTED PER WAVE PER EACH OBJECT
+        var tempShardsMacro = [];
+        for (j = 0; j<aCompleteData[i].waveNo.length; j++) {
+            var tempShardsMicro = [];
+            var tempShardsPercent = Math.floor((aCompleteData[i].shardsCol[j] / aCompleteData[i].shardsDrop[j]) * 100);
+            if (aCompleteData[i].shardsCol[j] === 0 || aCompleteData[i].shardsDrop[j] === 0) {tempShardsPercent = 0;}
+            tempShardsMicro.push(aCompleteData[i].waveNo[j]);
+            tempShardsMicro.push(tempShardsPercent);
+            tempShardsMacro.push(tempShardsMicro);
+        }
+        aDataShardsWaveGame[i] = {};
+        aDataShardsWaveGame[i].name = aCompleteData[i].id;
+        aDataShardsWaveGame[i].color = 'rgba(255, 158, 3, .5)';
+        aDataShardsWaveGame[i].data = tempShardsMacro;
+
+    }//END LOOPING THROUGH IMPORTED OBJECTS
+
+
     //UPDATE ARRAY WITH HIGHEST COMPLETED WAVE NUMBER
     aDataMaxWave = aDataMaxWave.slice(0, iDataMaxWave);
 
@@ -269,7 +337,7 @@ function fCrunchData () {
     //CALCULATE THE LONGEST, SHORTEST AND AVERAGE NO OF WAVES COMPLETED
     iDataLongestGame = getMaxOfArray(aDataGameLengths);
     iDataShortestGame = getMinOfArray(aDataGameLengths);
-    iDataAverageWaveTime = Math.floor (Math.average.apply (Math, aDataGameLengths));
+    iDataAverageGameLength = Math.floor (Math.average.apply (Math, aDataGameLengths));
 
     //CALCULATE PYRAMID DATA - WHERE USERS STOP PLAYING
     for (i = 0; i < aDataWaveCompletion.length; i++) {
@@ -311,10 +379,21 @@ function fCrunchData () {
         }
     }
 
-    //CALCULATE THE AVERAGE STRAFE TIME OVERALL
-    aDataStrafeTime = aDataStrafeTime.slice(0, iDataMaxWave);
-    iDataStrafeTimeAvg = Math.floor(Math.average.apply (Math, aDataStrafeTime));
-    iDataElapsedTimeAvg = Math.floor(Math.average.apply (Math, aDataElapsedTime));
+    //SHOW OR HIDE LABELS BASED ON NUMBER OF DATA SETS LOADED
+    if (aCompleteData.length > 5) {
+        bTextOverflowProtection = false;
+    }
+
+    //GET AVERAGE GAME TIME
+    for (i = 0; i < aDataElapsedTime.length; i++) {
+        iDataAverageGameTimeS += aDataElapsedTime[i];
+    }
+    iDataAverageGameTimeS = Math.floor(iDataAverageGameTimeS/aCompleteData.length);
+    iDataAverageGameTimeM = Math.floor(iDataAverageGameTimeS/60);
+
+    //CALCULATE THE AVERAGE STRAFE, ELAPSED AND WALK TIME OVERALL
+    iDataStrafeTimeAvg = Math.floor(Math.average.apply (aCompleteData.Math, aDataStrafeTimeObject));
+    iDataElapsedTimeAvg = Math.floor(Math.average.apply (Math, aDataElapsedTimeObject));
     iDataWalkTimeAvg = iDataElapsedTimeAvg - iDataStrafeTimeAvg;
 
     //CALCULATE THE AVERAGE ATTACKS PER WAVE
@@ -334,6 +413,13 @@ function fCrunchData () {
     iDataAttMeleeChAvg = Math.floor(Math.average.apply (Math, aDataAttMeleeCh));
     iDataAttRangeAvg = Math.floor(Math.average.apply (Math, aDataAttRange));
     iDataAttRangeChAvg = Math.floor(Math.average.apply (Math, aDataAttRangeCh));
+
+    //PRUNE THE AVERAGE SOULS AND SHARDS ARRAYS TO THE LENGTH OF THE HIGHEST GAME
+    aDataSoulsWaveAvg = aDataSoulsWaveAvg.slice(0, iDataMaxWave);
+    aDataShardsWaveAvg = aDataShardsWaveAvg.slice(0, iDataMaxWave);
+
+
+
 
     //DEBUG
     console.log(aCompleteData);
@@ -355,18 +441,27 @@ Math.average = function() {
     return tot / cnt;
 };
 
+function toFixed(value, precision) {
+    var power = Math.pow(10, precision || 0);
+    return String(Math.round(value * power) / power);
+}
+
 
 // DEBUG - CHECK IF DATA IS LOADED AND NOTIFY THE USER
 //-----------------------------------------------------------------------------
 function fOutputLog (situation) {
     if (situation === "noinput") {
-        $("#debug").html("<p style=\"display: inline;color: red;\">" + "You must select two dates to validate." + "</p>");
+        $("#debug").html("<p>" + "You must select two dates to validate." + "</p>");
+        $('#debug').removeClass().addClass('debugFail');
         return;
     } else if (situation === "nodataloaded") {
-        $("#debug").html("<p style=\"display: inline;color: red;\">" + "No data was loaded!" + "</p>");
+        $("#debug").html("<p>" + "No data was loaded!" + "</p>");
+        $('#debug').removeClass().addClass('debugFail');
     } else if (situation === "dataloadsuccessful") {
-       $("#debug").html("<p style=\"display: inline;color: blue;\">" + aCompleteData.length + " data sets loaded!" + "</p>");
-       $("#fileList").html("<p style=\"display: inline;color: grey;\">" + aFileListInput + "</p>");
+       $("#debug").html("<p>" + aCompleteData.length + " data sets loaded!" + "</p>");
+       $('#debug').removeClass().addClass('debugSuccess');
+       $("#fileList").html("<p>" + aFileListInput.toString() + "</p>");
+       $('#fileList').removeClass('hidden');
        $('#showCharts').removeClass('hidden');
     }
 }
