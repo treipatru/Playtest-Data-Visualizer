@@ -162,7 +162,9 @@ nav a:hover {
    ========================================================================== */
 
 
-
+/* ==
+IMPORT STYLE AND FEEDBACK
+== */
 input[type="text"] {
   margin: 0;
   width: 15%;
@@ -176,8 +178,93 @@ input[type="text"]:focus {
   outline: none;
 }
 
+#debug {
+    display:inline;
+    padding: 2px 0px 2px 30px;
+}
+.debugSuccess {
+    background-image: url("images/ok.png");
+    background-repeat: no-repeat;
+}
 
+.debugFail {
+    background-image: url("images/fail.png");
+    background-repeat: no-repeat;
+}
 
+#debug p{
+    display: inline;
+}
+
+#debug.debugSuccess p{
+    color:green;
+}
+
+#debug.debugFail p {
+    color:red;
+}
+
+#fileList {
+    padding: 20px 0px 20px 0px;
+}
+
+#fileList p {
+    color: gray;
+}
+
+/* ==
+SUMMARY PARAGRAPHS STYLE
+== */
+.infoText {
+    border-top: 1px dotted gray;
+    border-bottom: 1px dotted gray;
+}
+
+.infoText p {
+    vertical-align: middle;
+    font-size: 1.3em;
+    color: gray;
+}
+
+/* ==
+SEPARATOR STYLE
+== */
+.separator {
+    height: 25px;
+    background: #E4E9EA;
+    color: #AAAAAA;
+}
+.separator p {
+    text-align: center;
+}
+
+/* ==
+SECTION TITLES
+== */
+
+#gameCompletionTitle {
+    background-image: url("images/icn_GameCompletion.png");
+}
+
+#combatStatisticsTitle {
+    background-image: url("images/icn_CombatStats.png");
+}
+
+#healthProgressionTitle {
+    background-image: url("images/icn_HealthProg.png");
+}
+
+#collectiblesTitle {
+    background-image: url("images/icn_Collectibles.png");
+}
+
+#shopTitle {
+    background-image: url("images/icn_Shopping.png");
+}
+
+#mapTitle {
+    background-image: url("images/icn_Map.png");
+}
 
 /* ==========================================================================
    Media Queries
