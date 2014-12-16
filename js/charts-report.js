@@ -12,7 +12,10 @@ $(function(){
     $("#fileList").slideToggle("fast");
     $("#showCharts").hide();
     $("#textGameLength").text("Shortest game was " + iDataShortestGame + " waves while the longest game was " + iDataLongestGame + " waves.");
-    $("#textGameAverage").text("The average game is ended at wave " + iDataAverageWaveTime + ".");
+    $("#textGameAverage").text("The average game is ended at wave " + iDataAverageGameLength + ".");
+    $("#textWavesShort").text("Fastest wave was completed in as little as " + iDataShortestWave + " seconds.");
+    $("#textWavesLong").text("Longest wave took " + iDataLongestWave + " seconds to finish.");
+    $("#textAverageWave").text("The average time a player has spent in-game was " + iDataAverageGameTimeS + " seconds " + "(" + iDataAverageGameTimeM + " minutes).");
     $("#allCharts").show();
 
 //#############################################################################
@@ -34,18 +37,18 @@ $('#chartWaveCompletion').highcharts({
         enabled: false
     },
         xAxis: { //List of all loaded FILES
-            categories: aDataIds
+            categories: aDataIds            
         },
         yAxis: {
             min: 0,
             max: 30,
             title: {
-                text: 'Wave Finished'
+                text: 'Waves Finished'
             }
         },
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            pointFormat: '<tr><td style="color:{black};padding:0">{series.name}: </td>' +
             '<td style="padding:0"><b>{point.y} waves</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
@@ -57,8 +60,9 @@ $('#chartWaveCompletion').highcharts({
                 borderWidth: 0
             }
         },
-        series: [{ //Length(+1) of Waves array for each loaded file
+        series: [{
             name: 'Completed ',
+            color: Highcharts.getOptions().colors[3],
             data: aDataWaveCompletion
 
         }]
@@ -73,7 +77,11 @@ $(function () {
             marginRight: 100
         },
         title: {
-            text: 'Game Completion',
+            text: 'Game progress Breakdown',
+            x: -50
+        },
+        subtitle: {
+            text: '# of players that completed each game segment',
             x: -50
         },
         plotOptions: {
@@ -142,6 +150,7 @@ $('#chartWaveTime').highcharts({
         },
         series: [{ //Average of time elapsed of all waves/objects
             name: 'Time Elapsed',
+            color: Highcharts.getOptions().colors[1],
             data: aDataElapsedTime
 
         }]
@@ -312,12 +321,13 @@ $(function () {
         },
         xAxis: {
             title: {
-                enabled: true,
+                enabled: false,
                 text: 'Wave Number'
             },
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
+            minorTickInterval: 1,
             allowDecimals: false
         },
         yAxis: {
@@ -350,24 +360,7 @@ $(function () {
                 }
             }
         },
-        series: [{
-            name: 'Game01',//FILENAME(Data Object)
-            // color: 'rgba(223, 83, 83, .5)',
-            data: [[1, 10],[2,30],[3, 60], [4, 70], [5,100]] //1st digit is wave number, 2nd digit is souls collected
-        }, {
-            name: 'Game02',
-            // color: 'rgba(223, 83, 200, .5)',
-            data: [[1, 8],[2,49],[3, 42], [4, 5], [5,105], [6,105], [7,12], [8,190], [9,230], [10,450]]
-        }, {
-            name: 'Game03',
-            // color: 'rgba(2, 83, 83, .5)',
-            data: [[1, 7],[2,38],[3, 20], [4, 85], [5,110]]
-        }, {
-            name: 'Game04',
-            // color: 'rgba(223, 250, 83, .8)',
-            data: [[1, 8],[2,49],[3, 42], [4, 5], [5,105]]
-        }
-        ]
+        series: aDataHealthWaveGame
     });
 });
 
@@ -504,23 +497,25 @@ $(function () {
             zoomType: 'xy'
         },
         title: {
-            text: 'Waves Versus Souls Collection'
+            text: 'Percentage Of Souls Collected In Each Wave Per Game'
         },
         legend: {
             enabled: true
         },
         xAxis: {
             title: {
-                enabled: true,
+                enabled: false,
                 text: 'Wave Number'
             },
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
+            minorTickInterval: 1,
             allowDecimals: false
         },
         yAxis: {
-            floor: 0,
+            min: 0,
+            max: 100,
             title: {
                 text: 'Souls Collected'
             }
@@ -545,28 +540,11 @@ $(function () {
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: 'Wave Number {point.x}, Collected {point.y} souls'
+                    pointFormat: 'Wave Number {point.x}, Collected {point.y}% of souls'
                 }
             }
         },
-        series: [{
-            name: 'Game01',//FILENAME(Data Object)
-            // color: 'rgba(223, 83, 83, .5)',
-            data: [[1, 10],[2,30],[3, 60], [4, 70], [5,100]] //1st digit is wave number, 2nd digit is souls collected
-        }, {
-            name: 'Game02',
-            // color: 'rgba(223, 83, 200, .5)',
-            data: [[1, 8],[2,49],[3, 42], [4, 5], [5,105], [6,105], [7,12], [8,190], [9,230], [10,450]]
-        }, {
-            name: 'Game03',
-            // color: 'rgba(2, 83, 83, .5)',
-            data: [[1, 7],[2,38],[3, 20], [4, 85], [5,110]]
-        }, {
-            name: 'Game04',
-            // color: 'rgba(223, 250, 83, .8)',
-            data: [[1, 8],[2,49],[3, 42], [4, 5], [5,105]]
-        }
-        ]
+        series: aDataSoulsWaveGame
     });
 });
 
@@ -580,23 +558,25 @@ $(function () {
             zoomType: 'xy'
         },
         title: {
-            text: 'Waves Versus Shards Collection'
+            text: 'Percentage Of Shards Collected In Each Wave Per Game'
         },
         legend: {
             enabled: true
         },
         xAxis: {
             title: {
-                enabled: true,
+                enabled: false,
                 text: 'Wave Number'
             },
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
+            minorTickInterval: 1,
             allowDecimals: false
         },
         yAxis: {
-            floor: 0,
+            min: 0,
+            max: 100,
             title: {
                 text: 'Souls Collected'
             }
@@ -621,28 +601,11 @@ $(function () {
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: 'Wave Number {point.x}, Collected {point.y} souls'
+                    pointFormat: 'Wave Number {point.x}, Collected {point.y}% of shards'
                 }
             }
         },
-        series: [{
-            name: 'Game01',//FILENAME(Data Object)
-            // color: 'rgba(223, 83, 83, .5)',
-            data: [[1, 10],[2,30],[3, 60], [4, 70], [5,100]] //1st digit is wave number, 2nd digit is souls collected
-        }, {
-            name: 'Game02',
-            // color: 'rgba(223, 83, 200, .5)',
-            data: [[1, 4],[2,45],[3, 50], [4, 80], [5,120]]
-        }, {
-            name: 'Game03',
-            // color: 'rgba(2, 83, 83, .5)',
-            data: [[1, 7],[2,38],[3, 20], [4, 85], [5,110]]
-        }, {
-            name: 'Game04',
-            // color: 'rgba(223, 250, 83, .8)',
-            data: [[1, 8],[2,49],[3, 42], [4, 5], [5,105]]
-        }
-        ]
+        series: aDataShardsWaveGame
     });
 });
 
@@ -656,7 +619,7 @@ $(function () {
             x: -20 //center
         },
         subtitle: {
-            text: 'Source: WorldClimate.com',
+            text: null,
             x: -20
         },
         xAxis: {
@@ -676,10 +639,10 @@ $(function () {
         },
         series: [{
             name: 'Souls',
-            data: [71,67,67,39,22,77,48,95,74,98,86,88,72,84,24,94,91,31,49,87,24,64,56,68,49,90,95,32,24,100]
+            data: aDataSoulsWaveAvg
         }, {
             name: 'Shards',
-            data: [0,0,0,0,0,0,0,94,87,99,73,73,91,92,98,92,93,84,76,67,77,97,61,75,96,74,87,81,76,82]
+            data: aDataShardsWaveAvg
         }]
     });
 });
