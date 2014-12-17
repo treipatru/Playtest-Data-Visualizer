@@ -77,10 +77,10 @@ $(function(){
     
     $("#gameCompletionTitle").click(function(){
         $("#chartWaveCompletion").slideToggle("fast");
-        $("#chartWaveCompletionAvg").slideToggle("fast");
+        $("#infoWaveCompletion").slideToggle("fast");
         $("#chartWaveTime").slideToggle("fast");
         $("#chartWavePyramid").slideToggle("fast");
-        $("#gameTimeStatistics").slideToggle("fast");
+        $("#infoGametimeStats").slideToggle("fast");
     });
     $("#combatStatisticsTitle").click(function(){
         $("#chartAttackTypes").slideToggle("fast");
@@ -100,7 +100,7 @@ $(function(){
         $("#chartShopPotions").slideToggle("fast");
         $("#chartShopUpgrades").slideToggle("fast");
         $("#chartShopGlyphs").slideToggle("fast");
-        $("#shopStatistics").slideToggle("fast");
+        $("#infoShopStats").slideToggle("fast");
     });
     $("#mapTitle").click(function(){
         $("#chartMapHeatMap").slideToggle("fast");
@@ -149,6 +149,7 @@ var iDataAttMeleeAvg = 0;
 var iDataAttMeleeChAvg = 0;
 var iDataAttRangeAvg = 0;
 var iDataAttRangeChAvg = 0;
+//GAMES LENGTH DATA
 var aDataGameLengths = []; //list of game lengths
 var iDataShortestGame = 0; //fewest no of waves completed
 var iDataLongestGame = 0; //biggest no of waves completed
@@ -160,11 +161,32 @@ var iDataGameCompleteT4 = 0; //completed wave 16-20
 var iDataGameCompleteT5 = 0; //completed wave 21-25
 var iDataGameCompleteT6 = 0; //completed wave 25-29
 var iDataGameCompleteT7 = 0; //completed wave 30
+//HEALTH AND REVIVES DATA
 var aDataHealthWaveGame = []; //objects for HighCharts scatter plot (health lost/wave)
+var aDataHealthLostAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataRevivesAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//SOULS AND SHARDS DATA
 var aDataSoulsWaveGame = []; //objects for HighCharts scatter plot (% of souls collected/wave)
 var aDataSoulsWaveAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //average souls collection per waves in all objects
 var aDataShardsWaveGame = []; //objects for HighCharts scatter plot (% of shards collected/wave)
 var aDataShardsWaveAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //average shard collection per waves in all objects
+//POTIONS DATA
+var aDataPotionsBoughtAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataPotionsUsedAvg = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataTotalPotionsB = 0; //total potions bought
+var iDataTotalPotionsU = 0; //total potions used
+var iDataAveragePotionB = 0; //average of potions bought per length of game
+//UPGRADES AND GLYPHS DATA
+var aDataUpgradesT1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataUpgradesT2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataUpgradesT3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataUpgradesT4 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataUpgradesT5 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataGlyphsSTR = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataGlyphsVIT = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var aDataGlyphsMIS = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var iDataUpgradesAvg = 0;
+var iDataGlyphsAvg = 0;
 
 //#############################################################################
 // DEFINE FUNCTIONS TO BE CALLED WHEN PROGRAM IS INITIALIZED
@@ -258,6 +280,15 @@ function fCrunchData () {
             aDataAttMeleeCh[j] += aCompleteData[i].meleeCh[j];
             aDataAttRange[j] += aCompleteData[i].range[j];
             aDataAttRangeCh[j] += aCompleteData[i].rangeCh[j];
+            //GET CUMULATED HEALTH LOST PER WAVES
+            aDataHealthLostAvg[j] += aCompleteData[i].healthLost[j];
+            //GET CUMULATED POTIONS BOUGHT PER WAVES
+            aDataPotionsBoughtAvg[j] += aCompleteData[i].potionsBought[j];
+            //GET CUMULATED POTIONS USED PER WAVES
+            aDataPotionsUsedAvg[j] += aCompleteData[i].potionsUsed[j];
+            //GET CUMULATED REVIVES PER WAVES
+            aDataRevivesAvg[j] += aCompleteData[i].revives[j];
+
         }
 
         //GET LONGEST AND SHORTEST WAVE TIMES FOR ALL OBJECTS LOADED
@@ -296,6 +327,7 @@ function fCrunchData () {
             var tempSoulsMicro = [];
             var tempSoulsPercent = Math.floor((aCompleteData[i].soulsCol[j] / aCompleteData[i].soulsDrop[j]) * 100);
             if (aCompleteData[i].soulsCol[j] === 0 || aCompleteData[i].soulsDrop[j] === 0) {tempSoulsPercent = 0;}
+            aDataSoulsWaveAvg[j] += tempSoulsPercent;
             tempSoulsMicro.push(aCompleteData[i].waveNo[j]);
             tempSoulsMicro.push(tempSoulsPercent);
             tempSoulsMacro.push(tempSoulsMicro);
@@ -311,6 +343,7 @@ function fCrunchData () {
             var tempShardsMicro = [];
             var tempShardsPercent = Math.floor((aCompleteData[i].shardsCol[j] / aCompleteData[i].shardsDrop[j]) * 100);
             if (aCompleteData[i].shardsCol[j] === 0 || aCompleteData[i].shardsDrop[j] === 0) {tempShardsPercent = 0;}
+            aDataShardsWaveAvg[j] += tempShardsPercent;
             tempShardsMicro.push(aCompleteData[i].waveNo[j]);
             tempShardsMicro.push(tempShardsPercent);
             tempShardsMacro.push(tempShardsMicro);
@@ -319,6 +352,36 @@ function fCrunchData () {
         aDataShardsWaveGame[i].name = aCompleteData[i].id;
         aDataShardsWaveGame[i].color = 'rgba(255, 158, 3, .5)';
         aDataShardsWaveGame[i].data = tempShardsMacro;
+
+        //GET ARRAYS FOR CUMULATED TIER UPGRADES
+        for (j = 0; j < aCompleteData[i].waveNo.length; j++) {
+            for (k = 0; k < aCompleteData[i].upgrades[j].length; k++) {
+                if (/(T)1\w{3}/g.test(aCompleteData[i].upgrades[j][k])) {
+                    aDataUpgradesT1[j] ++;
+                } else if (/(T)2\w{3}/g.test(aCompleteData[i].upgrades[j][k])) {
+                    aDataUpgradesT2[j] ++;
+                } else if (/(T)3\w{3}/g.test(aCompleteData[i].upgrades[j][k])) {
+                    aDataUpgradesT3[j] ++;
+                }  else if (/(T)4\w{3}/g.test(aCompleteData[i].upgrades[j][k])) {
+                    aDataUpgradesT4[j] ++;
+                }  else if (/(T)5\w{3}/g.test(aCompleteData[i].upgrades[j][k])) {
+                    aDataUpgradesT5[j] ++;
+                }
+            }
+        }
+
+        //GET ARRAYS FOR CUMULATED GLYPH CATEGORY PURCHASES
+        for (j = 0; j < aCompleteData[i].waveNo.length; j++) {
+            for (k = 0; k < aCompleteData[i].glyphBought[j].length; k++) {
+                if (/(STR)\d{2}/g.test(aCompleteData[i].glyphBought[j][k])) {
+                    aDataGlyphsSTR[j] ++;
+                } else if (/(VIT)\d{2}/g.test(aCompleteData[i].glyphBought[j][k])) {
+                    aDataGlyphsVIT[j] ++;
+                } else if (/(MIS)\d{2}/g.test(aCompleteData[i].glyphBought[j][k])) {
+                    aDataGlyphsMIS[j] ++;
+                }
+            }
+        }  
 
     }//END LOOPING THROUGH IMPORTED OBJECTS
 
@@ -380,7 +443,7 @@ function fCrunchData () {
     }
 
     //SHOW OR HIDE LABELS BASED ON NUMBER OF DATA SETS LOADED
-    if (aCompleteData.length > 5) {
+    if (aCompleteData.length > 15) {
         bTextOverflowProtection = false;
     }
 
@@ -414,19 +477,69 @@ function fCrunchData () {
     iDataAttRangeAvg = Math.floor(Math.average.apply (Math, aDataAttRange));
     iDataAttRangeChAvg = Math.floor(Math.average.apply (Math, aDataAttRangeCh));
 
+    //CALCULATE THE AVERAGE HP LOST PER WAVE
+    aDataHealthLostAvg = aDataHealthLostAvg.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataHealthLostAvg.length; i++) {
+        aDataHealthLostAvg[i] = Math.floor(aDataHealthLostAvg[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //CALCULATE THE AVERAGE POTIONS BOUGHT PER WAVE AND TOTAL BOUGHT OVERALL
+    aDataPotionsBoughtAvg = aDataPotionsBoughtAvg.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataPotionsBoughtAvg.length; i++) {
+        iDataTotalPotionsB += aDataPotionsBoughtAvg[i];
+        aDataPotionsBoughtAvg[i] = Math.floor(aDataPotionsBoughtAvg[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //CALCULATE THE FREQUENCY OF BUYING A POTION
+    iDataAveragePotionB = Math.floor(iDataTotalPotionsB / aDataElapsedWaveCount.length);
+
+    //CALCULATE THE AVERAGE POTIONS USED PER WAVE
+    aDataPotionsUsedAvg = aDataPotionsUsedAvg.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataPotionsUsedAvg.length; i++) {
+        iDataTotalPotionsU += aDataPotionsUsedAvg[i];
+        aDataPotionsUsedAvg[i] = Math.floor(aDataPotionsUsedAvg[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //REMOVE FREE POTIONS FROM THE USED ONES (ATM IT'S 2 FREE/GAME)
+    iDataTotalPotionsU = iDataTotalPotionsU - (aDataIds.length * 2);
+
+    //CALCULATE THE AVERAGE REVIVES USED PER WAVE
+    aDataRevivesAvg = aDataRevivesAvg.slice(0, iDataMaxWave);
+    for (i = 0; i < aDataRevivesAvg.length; i++) {
+        aDataRevivesAvg[i] = Math.ceil(aDataRevivesAvg[i] / aDataElapsedWaveCount[i]);
+    }
+
+    //PRUNE LENGTH OF VARIOUS ARRAYS TO THE MAXWAVE COUNT
+    aDataUpgradesT1 = aDataUpgradesT1.slice(0,iDataMaxWave);
+    aDataUpgradesT2 = aDataUpgradesT2.slice(0,iDataMaxWave);
+    aDataUpgradesT3 = aDataUpgradesT3.slice(0,iDataMaxWave);
+    aDataUpgradesT4 = aDataUpgradesT4.slice(0,iDataMaxWave);
+    aDataUpgradesT5 = aDataUpgradesT5.slice(0,iDataMaxWave);
+    aDataGlyphsSTR = aDataGlyphsSTR.slice(0,iDataMaxWave);
+    aDataGlyphsVIT = aDataGlyphsVIT.slice(0,iDataMaxWave);
+    aDataGlyphsMIS = aDataGlyphsMIS.slice(0,iDataMaxWave);
+
+    //CALCULATE THE AVERATE # OF UPGRADES AND GLYPHS BOUGHT IN A GAME
+
+    for (i = 0; i < iDataMaxWave; i++) {
+        iDataUpgradesAvg += aDataUpgradesT1[i] + aDataUpgradesT2[i] + aDataUpgradesT3[i] + aDataUpgradesT4[i] + aDataUpgradesT5[i];
+        iDataGlyphsAvg += aDataGlyphsSTR[i] + aDataGlyphsVIT[i] + aDataGlyphsMIS[i];
+    }
+    iDataUpgradesAvg = Math.floor(iDataUpgradesAvg / aDataIds.length);
+    iDataGlyphsAvg = Math.ceil(iDataGlyphsAvg / aDataIds.length);
+
     //PRUNE THE AVERAGE SOULS AND SHARDS ARRAYS TO THE LENGTH OF THE HIGHEST GAME
     aDataSoulsWaveAvg = aDataSoulsWaveAvg.slice(0, iDataMaxWave);
     aDataShardsWaveAvg = aDataShardsWaveAvg.slice(0, iDataMaxWave);
+    for (i = 0; i < iDataMaxWave; i++) {
+        aDataSoulsWaveAvg[i] = Math.floor(aDataSoulsWaveAvg[i] / aDataIds.length);
+        aDataShardsWaveAvg[i] = Math.floor(aDataShardsWaveAvg[i] / aDataIds.length);
+    }    
 
-
-
-
-    //DEBUG
-    console.log(aCompleteData);
 }
 
 function getMaxOfArray(numArray) {
-    return Math.max.apply(null, numArray);
+    return Math.max.apply(null, numArray)
 }
 
 function getMinOfArray(numArray) {
@@ -460,7 +573,10 @@ function fOutputLog (situation) {
     } else if (situation === "dataloadsuccessful") {
        $("#debug").html("<p>" + aCompleteData.length + " data sets loaded!" + "</p>");
        $('#debug').removeClass().addClass('debugSuccess');
-       $("#fileList").html("<p>" + aFileListInput.toString() + "</p>");
+       for (i = 0; i < aFileListInput.length; i++) {
+        $("#fileList").append("<p>" + aFileListInput[i] + "</p>");
+       }
+       // $("#fileList").append("<p>" + aFileListInput.toString() + "</p>");
        $('#fileList').removeClass('hidden');
        $('#showCharts').removeClass('hidden');
     }
