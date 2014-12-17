@@ -23,6 +23,7 @@
     </head>
     <body>
         <div class="header-container">
+        <div id="superHeader"></div>
             <header class="wrapper clearfix">
                 <h1 class="title">Playtest Data</h1>
                 <nav>
@@ -56,56 +57,59 @@
                 <article style="display:none" id="allCharts">
                     <section>
                     <h2 id="gameCompletionTitle">Game Completion</h2>
-                    <div id="chartWaveCompletion" style="width:100%; height:300px;padding-bottom: 20px;"></div>
-                    <div id="chartWavePyramid" style="width:50%; height:400px;float:right;padding-bottom: 20px;"></div>
-                    <div id="chartWaveCompletionAvg" style="width:50%; height:400px;float:left;" class="infoText">
-                        <p id="textGameLength"></p>
-                        <p id="textGameAverage"></p>
+                    <div id="chartWaveCompletion" class="chartContainer" style="width:100%; height:300px;"></div>
+                    <div id="chartWavePyramid" class="chartContainer" style="width:50%; height:400px;float:right;"></div>
+                    <div id="infoWaveCompletion" class="infoText" style="width:50%;float:left;height:400px;">
+                        <div id="textGameLength" style="padding-top:150px;"></div>
+                        <br>
+                        <div id="textGameAverage"></div>
                     </div>
-                    <div id="chartWaveTime" style="width:100%; height:300px;clear:both;padding-bottom: 20px;"></div>
-                    <div id="gameTimeStatistics" class="infoText" style="padding-bottom: 20px;">
-                        <p id="textWavesLong"></p>
-                        <p id="textWavesShort"></p>
-                        <p id="textAverageWave"></p>
+                    <div id="chartWaveTime" class="chartContainer" style="width:100%; height:300px;clear:both;"></div>
+                    <div id="infoGametimeStats" class="infoText">
+                        <div id="textWavesLong"></div>
+                        <div id="textWavesShort"></div>
+                        <div id="textAverageWave"></div>
                     </div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
                     <h2 id="combatStatisticsTitle">Combat Statistics</h2>
-                    <div id="chartAttackTypes" style="width:50%; height:300px;float:left;padding-bottom: 20px;"></div>
-                    <div id="chartWalkingStrafing" style="width:50%; height:300px;float:right;padding-bottom: 20px;"></div>
-                    <div id="chartAttackTypesPerWave" style="width:100%; height:400px;clear:both;padding-bottom: 20px;"></div>
+                    <div id="chartAttackTypes" class="chartContainer" style="width:50%; height:300px;float:left;"></div>
+                    <div id="chartWalkingStrafing" class="chartContainer" style="width:50%; height:300px;float:right;"></div>
+                    <div id="chartAttackTypesPerWave" class="chartContainer" style="width:100%; height:400px;clear:both;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
                     <h2 id="healthProgressionTitle">Health Progression</h2>
-                    <div id="chartHealthPlot" style="width:100%; height:400px;padding-bottom: 20px;"></div>
-                    <div id="chartHealthAveragePotionsRevives" style="width:100%; height:400px;padding-bottom: 20px;"></div>
+                    <div id="chartHealthPlot" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartHealthAveragePotionsRevives" class="chartContainer" style="width:100%; height:400px;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
                     <h2 id="collectiblesTitle">Collectibles</h2>
-                    <div id="chartSoulsCollection" style="width:100%; height:400px;padding-bottom: 20px;"></div>
-                    <div id="chartShardsCollection" style="width:100%; height:400px;padding-bottom: 20px;"></div>
-                    <div id="chartAverageSoulsShards" style="width:100%; height:400px;padding-bottom: 20px;"></div>
+                    <div id="chartSoulsCollection" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartShardsCollection" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartAverageSoulsShards" class="chartContainer" style="width:100%; height:400px;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
                     <h2 id="shopTitle">Shop Statistics</h2>
-                    <div id="chartShopPotions" style="width:33%; height:550px;float:left;padding-bottom: 20px;"></div>
-                    <div id="chartShopUpgrades" style="width:33%; height:550px;float:left;padding-bottom: 20px;"></div>
-                    <div id="chartShopGlyphs" style="width:33%; height:550px;float:left;padding-bottom: 20px;"></div>
-                    <div id="shopStatistics" class="infoText" style="clear:both;padding-bottom: 20px;">
-                        <p>A total of X potions have been bought in Y games.</p>
-                        <p>In the average game a potion is purchased every Z waves.</p>
-                        <p>In the average game the player gets X upgrades.</p>
+                    <div id="chartShopUpgrades" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartShopGlyphs" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="infoShopStats" class="infoText" style="width:50%;float:left;height:500px">
+                        <div id="textPotionsInGames"style="padding-top:125px;"></div>
+                        <br>
+                        <div id="textPotionAverageBought"></div>
+                        <br>
+                        <div id="textUpgradesGlyphs"></div>
                     </div>
+                    <div id="chartShopPotions" class="chartContainer" style="width:50%;height:500px;float:right;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
-                    <section>
+                    <!-- <section>
                     <h2 id="mapTitle">Map</h2>
-                    <div id="chartMapHeatMap" style="width:100%; height:400px;padding-bottom: 20px;"></div>
-                    </section>
+                    <div id="chartMapHeatMap" class="chartContainer" style="width:100%; height:400px;"></div>
+                    </section> -->
                 </article>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
