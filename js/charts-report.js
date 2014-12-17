@@ -11,11 +11,16 @@ $(function(){
   $("#showCharts").click(function(){
     $("#fileList").slideToggle("fast");
     $("#showCharts").hide();
-    $("#textGameLength").text("Shortest game was " + iDataShortestGame + " waves while the longest game was " + iDataLongestGame + " waves.");
-    $("#textGameAverage").text("The average game is ended at wave " + iDataAverageGameLength + ".");
-    $("#textWavesShort").text("Fastest wave was completed in as little as " + iDataShortestWave + " seconds.");
-    $("#textWavesLong").text("Longest wave took " + iDataLongestWave + " seconds to finish.");
-    $("#textAverageWave").text("The average time a player has spent in-game was " + iDataAverageGameTimeS + " seconds " + "(" + iDataAverageGameTimeM + " minutes).");
+    //GAME COMPLETION GAME STATISTICS (TEXT)
+    $("#textGameLength").html("<p>Shortest game was <b>" + iDataShortestGame + "</b> waves while the longest game was <b>" + iDataLongestGame + "</b> waves.</p>");
+    $("#textGameAverage").html("<p>The average game is ended at wave <b>" + iDataAverageGameLength + "</b>.</p>");
+    $("#textWavesShort").html("<p>Fastest wave was completed in as little as <b>" + iDataShortestWave + "</b> seconds.</p>");
+    $("#textWavesLong").html("<p>Longest wave took <b>" + iDataLongestWave + "</b> seconds to finish.</p>");
+    $("#textAverageWave").html("<p>The average time a player has spent in-game was <b>" + iDataAverageGameTimeS + "</b> seconds " + "(<b>" + iDataAverageGameTimeM + "</b> minutes).</p>");
+    //SHOP GAME STATISTICS (TEXT)
+    $("#textPotionsInGames").html("<p>In " + aDataIds.length + " games," + " a total of <b>" + iDataTotalPotionsB + "</b> potions have been bought and <b>" + iDataTotalPotionsU + "</b> used (not including free ones).</p>");
+    $("#textPotionAverageBought").html("<p>In the average game a potion is purchased every <b>" + iDataAveragePotionB + "</b> waves.</p>");
+    $("#textUpgradesGlyphs").html("<p>In an average game the a player buys <b>" + iDataUpgradesAvg  + "</b> upgrades and <b>" + iDataGlyphsAvg + "</b> glyphs.</p>");
     $("#allCharts").show();
 
 //#############################################################################
@@ -36,8 +41,11 @@ $('#chartWaveCompletion').highcharts({
     legend: {
         enabled: false
     },
-        xAxis: { //List of all loaded FILES
-            categories: aDataIds            
+        xAxis: {
+            categories: aDataIds,
+            labels: {
+                enabled: bTextOverflowProtection
+            }
         },
         yAxis: {
             min: 0,
@@ -426,12 +434,12 @@ $(function () {
             name: 'HP Lost',
             type: 'column',
             yAxis: 1,
-            data: [6,9,12,6,59,63,0,60,24,61,0,9,42,161,80,171,111,323,226,62,471,386,174,327,151,366,420,237,457,173],
+            data: aDataHealthLostAvg,
         }, {
             name: 'Potions',
             type: 'spline',
             yAxis: 0,
-            data: [3,3,2,2,3,0,3,2,0,2,2,1,3,1,0,3,0,1,0,2,3,2,3,0,1,0,1,0,2,2],
+            data: aDataPotionsUsedAvg,
             marker: {
                 enabled: false
             },
@@ -440,7 +448,7 @@ $(function () {
             name: 'Revives',
             type: 'spline',
             yAxis: 0,
-            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,2,2,0,2,0,2,0,3,2,2,3,3,1]
+            data: aDataRevivesAvg
         }]
     });
 });
@@ -629,7 +637,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: 'PERCENTAGE COLLECTED'
+                text: 'PERCENTAGE'
             },
             plotLines: [{
                 value: 0,
@@ -718,7 +726,7 @@ $(function () {
         },
         series: [{
             name: 'Potions',
-            data: [1,1,1,0,2,2,2,0,1,2,2,2,0,1,0,1,1,1,0,0,0,0,0,0,1,0,2,1,0,1]
+            data: aDataPotionsBoughtAvg
         }]
     });
 });
@@ -728,77 +736,55 @@ $(function () {
 $(function () {
     $('#chartShopUpgrades').highcharts({
         chart: {
-            type: 'bar'
+            type: 'column'
         },
         title: {
-            text: 'Upgrades Bought'
+            text: 'Total # Of Upgrades Bought'
         },
         subtitle: {
-            text: 'Averaged per wave from all selected data'
+            text: null
         },
         xAxis: {
-            categories: aDataMaxWave,
-            title: {
-                text: null
-            },            
-            labels: {
-                style: {
-                    fontSize: '10px'
-                }
-            },
-            allowDecimals: false
+            categories: aDataMaxWave
         },
         yAxis: {
             min: 0,
+            minTickInterval: 1,
             title: {
-                text: null,
-            },
-            labels: {
-                overflow: 'justify',
-            },
-            allowDecimals: false
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: false,
-                    //Hide values of 0 from the data labels
-                    formatter: function(){
-                        console.log(this);
-                        var val = this.y;
-                        if (val === 0) {
-                            return null;
-                        }
-                        return val;
-                    }
-
-                }
+                text: null
             }
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -10,
-            y: 420,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true,
-            enabled: true
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
         },
         series: [{
             name: 'Tier 1',
-            data: [0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            data: aDataUpgradesT1
         }, {
             name: 'Tier 2',
-            data: [0,1,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            data: aDataUpgradesT2
         }, {
             name: 'Tier 3',
-            data: [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0]
+            data: aDataUpgradesT3
         }, {
             name: 'Tier 4',
-            data: [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]
+            data: aDataUpgradesT4
+
+        }, {
+            name: 'Tier 5',
+            data: aDataUpgradesT5
+
         }]
     });
 });
@@ -808,67 +794,47 @@ $(function () {
 $(function () {
     $('#chartShopGlyphs').highcharts({
         chart: {
-            type: 'bar'
+            type: 'column'
         },
         title: {
-            text: 'Glyphs Bought'
+            text: 'Total # Of Glyphs Bought'
         },
         subtitle: {
-            text: 'All items bought from all selected data'
+            text: null
         },
         xAxis: {
-            categories: aDataMaxWave,
-            title: {
-                text: null
-            },
-            labels: {
-                style: {
-                    fontSize: '10px'
-                }
-            },
-            allowDecimals: false,
+            categories: aDataMaxWave
         },
         yAxis: {
             min: 0,
+            minTickInterval: 1,
             title: {
-                text: null,
-            },
-            labels: {
-                overflow: 'justify',
-            },
-            allowDecimals: false
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true,            
-                    formatter: function(){
-                        var val = this.y;
-                        if (val === 0) {
-                            return null;
-                        }
-                        return val;
-                    }
-
-                }
+                text: null
             }
         },
-
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true,
-            enabled: false
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
         },
         series: [{
-            name: 'Potions',
-            data: [1,1,1,0,2,2,2,0,1,2,2,2,0,1,0,1,1,1,0,0,0,0,0,0,1,0,2,1,0,1]
+            name: 'Strength',
+            data: aDataGlyphsSTR
+        }, {
+            name: 'Vitality',
+            data: aDataGlyphsVIT
+        }, {
+            name: 'Souls',
+            data: aDataGlyphsMIS
         }]
     });
 });
@@ -881,74 +847,74 @@ $(function () {
 
 // MAP AREAS HEATMAP
 //-----------------------------------------------------------------------------
-$(function () {
-    $('#chartMapHeatMap').highcharts({
+// $(function () {
+//     $('#chartMapHeatMap').highcharts({
 
-        chart: {
-            type: 'heatmap',
-            marginTop: 40,
-            marginBottom: 40
-        },
+//         chart: {
+//             type: 'heatmap',
+//             marginTop: 40,
+//             marginBottom: 40
+//         },
 
-        title: {
-            text: 'Level Areas Heatmap'
-        },
+//         title: {
+//             text: 'Level Areas Heatmap'
+//         },
 
-        xAxis: {
-            categories: ['Throne Room', 'Heart Room', 'Armory Room', 'Book Room', 'Treasure Room']
-        },
+//         xAxis: {
+//             categories: ['Throne Room', 'Heart Room', 'Armory Room', 'Book Room', 'Treasure Room']
+//         },
 
-        yAxis: {
-            categories: aDataMaxWave,
-            title: null
-        },
+//         yAxis: {
+//             categories: aDataMaxWave,
+//             title: null
+//         },
 
-        colorAxis: {
-            min: 0,
-            minColor: '#FFFFFF',
-            maxColor: '#F50A0A'
-        },
+//         colorAxis: {
+//             min: 0,
+//             minColor: '#FFFFFF',
+//             maxColor: '#F50A0A'
+//         },
 
-        legend: {
-            align: 'right',
-            layout: 'vertical',
-            margin: 0,
-            verticalAlign: 'top',
-            y: 25,
-            symbolHeight: 320
-        },
+//         legend: {
+//             align: 'right',
+//             layout: 'vertical',
+//             margin: 0,
+//             verticalAlign: 'top',
+//             y: 25,
+//             symbolHeight: 320
+//         },
 
-        tooltip: {
-            formatter: function () {
-                return 'Players spent ' + this.point.value + ' seconds in the <br>' + '<b>' + this.series.xAxis.categories[this.point.x] +
-                '</b>' + ' in ' + '<b>' + this.series.yAxis.categories[this.point.y] + '<b>';
-                // return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> sold <br><b>' +
-                //     this.point.value + '</b> items on <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
-            }
-        },
+//         tooltip: {
+//             formatter: function () {
+//                 return 'Players spent ' + this.point.value + ' seconds in the <br>' + '<b>' + this.series.xAxis.categories[this.point.x] +
+//                 '</b>' + ' in ' + '<b>' + this.series.yAxis.categories[this.point.y] + '<b>';
+//                 // return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> sold <br><b>' +
+//                 //     this.point.value + '</b> items on <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
+//             }
+//         },
 
-        series: [{
-            name: 'Seconds Per Room',
-            borderWidth: 1,
-            data: [
-            [0, 0, 35], [0, 1, 0], [0, 2, 0], [0, 3, 0], [0, 4, 0],[0,5,0],
-            [1, 0, 80], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0],[1,5,0],
-            [2, 0, 90], [2, 1, 0], [2, 2, 0], [2, 3, 0], [2, 4, 0], [2,5,0],
-            [3, 0, 120], [3, 1, 0], [3, 2, 0], [3, 3, 0], [3, 4, 0], [3,5,0],
-            [4, 0, 80], [4, 1, 148], [4, 2, 29], [4, 3, 109], [4, 4, 122], [4,5,0],
-            ],
-            dataLabels: {
-                enabled: true,
-                color: 'black',
-                style: {
-                    textShadow: 'none',
-                    HcTextStroke: null
-                }
-            }
-        }]
+//         series: [{
+//             name: 'Seconds Per Room',
+//             borderWidth: 1,
+//             data: [
+//             [0, 0, 35], [0, 1, 0], [0, 2, 0], [0, 3, 0], [0, 4, 0],[0,5,0],
+//             [1, 0, 80], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0],[1,5,0],
+//             [2, 0, 90], [2, 1, 0], [2, 2, 0], [2, 3, 0], [2, 4, 0], [2,5,0],
+//             [3, 0, 120], [3, 1, 0], [3, 2, 0], [3, 3, 0], [3, 4, 0], [3,5,0],
+//             [4, 0, 80], [4, 1, 148], [4, 2, 29], [4, 3, 109], [4, 4, 122], [4,5,0],
+//             ],
+//             dataLabels: {
+//                 enabled: true,
+//                 color: 'black',
+//                 style: {
+//                     textShadow: 'none',
+//                     HcTextStroke: null
+//                 }
+//             }
+//         }]
 
-    });
-});
+//     });
+// });
 
    //End Display Charts
 });
