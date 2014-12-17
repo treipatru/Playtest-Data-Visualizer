@@ -5,7 +5,7 @@
 
 // Load the fonts
 Highcharts.createElement('link', {
-	href: 'http://fonts.googleapis.com/css?family=Open+Sans:300,400',
+	href: 'http://fonts.googleapis.com/css?family=Roboto+Slab:300',
 	rel: 'stylesheet',
 	type: 'text/css'
 }, null, document.getElementsByTagName('head')[0]);
@@ -28,8 +28,9 @@ Highcharts.theme = {
 	},
 	tooltip: {
 		borderWidth: 0,
-		backgroundColor: 'rgba(150,150,150,0.8)',
-		shadow: false
+		backgroundColor: 'rgba(220,220,220,0.9)',
+		shadow: false,
+		hideDelay: 200
 	},
 	legend: {
 		itemStyle: {
