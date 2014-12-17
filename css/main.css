@@ -1,4 +1,6 @@
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300);
 
 html,
 button,
@@ -63,7 +65,7 @@ textarea {
 
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
-    background: #ECF0F1;;
+    background: #ECF0F1;
 }
 
 .wrapper {
@@ -107,11 +109,9 @@ nav a {
     display: block;
     margin-bottom: 10px;
     padding: 15px 0;
-
     text-align: center;
     text-decoration: none;
     font-weight: bold;
-
     color: #ECF0F1;
     background: #2980B9;
 }
@@ -146,7 +146,8 @@ nav a:hover {
     color: #FAFEFF;
     text-align: center;
     font-weight: normal;
-    /*font-size: 0.7em;*/
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.2em;
 }
 
 /* ===============
@@ -161,9 +162,12 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+#superHeader {
+    height:30px;
+}
 
 /* ==
-IMPORT STYLE AND FEEDBACK
+INPUT STYLE AND FEEDBACK
 == */
 input[type="text"] {
   margin: 0;
@@ -213,15 +217,23 @@ input[type="text"]:focus {
 }
 
 /* ==
+CHART CONTAINER
+== */
+.chartContainer {
+    padding-bottom: 20px;
+}
+
+/* ==
 SUMMARY PARAGRAPHS STYLE
 == */
 .infoText {
     border-top: 1px dotted gray;
     border-bottom: 1px dotted gray;
+    height: auto;
 }
 
 .infoText p {
-    vertical-align: middle;
+    text-align: center;
     font-size: 1.3em;
     color: gray;
 }
@@ -233,6 +245,7 @@ SEPARATOR STYLE
     height: 25px;
     background: #E4E9EA;
     color: #AAAAAA;
+    clear:both;
 }
 .separator p {
     text-align: center;

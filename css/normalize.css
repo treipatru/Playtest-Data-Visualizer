@@ -129,11 +129,13 @@ a:hover {
  */
 
 h1 {
+    font-family: 'PT Sans', sans-serif;
     font-size: 2.5em;
-    margin: 0.67em 0;
+    margin: 0.2em 0;
 }
 
 h2 {
+    font-family: 'PT Sans', sans-serif;
     font-size: 2em;
     margin: 0.6em 0.2em;
     width: 100%;
@@ -221,6 +223,7 @@ mark {
 
 p,
 pre {
+    font-family: 'Roboto Slab', serif;
     margin: 0.5em 0;
 }
 
@@ -305,7 +308,9 @@ dl,
 menu,
 ol,
 ul {
+    font-size: 1em;
     margin: 1em 0;
+    font-family: 'Roboto Slab', serif;
 }
 
 dd {
