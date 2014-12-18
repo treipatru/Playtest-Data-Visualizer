@@ -10,7 +10,7 @@
 $(function(){
   $("#showCharts").click(function(){
     $("#fileList").slideToggle("fast");
-    $("#showCharts").hide();
+    $("#showCharts").slideToggle("fast");
     //GAME COMPLETION GAME STATISTICS (TEXT)
     $("#textGameLength").html("<p>Shortest game was <b>" + iDataShortestGame + "</b> waves while the longest game was <b>" + iDataLongestGame + "</b> waves.</p>");
     $("#textGameAverage").html("<p>The average game is ended at wave <b>" + iDataAverageGameLength + "</b>.</p>");
@@ -44,7 +44,7 @@ $('#chartWaveCompletion').highcharts({
         xAxis: {
             categories: aDataIds,
             labels: {
-                enabled: bTextOverflowProtection
+                enabled: bDataShowLabels
             }
         },
         yAxis: {
@@ -749,7 +749,7 @@ $(function () {
         },
         yAxis: {
             min: 0,
-            minTickInterval: 1,
+            allowDecimals: false,
             title: {
                 text: null
             }
@@ -917,5 +917,6 @@ $(function () {
 // });
 
    //End Display Charts
+   fClearAllData();
 });
 });
