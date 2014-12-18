@@ -1,7 +1,7 @@
 //#############################################################################
 //#############################################################################
 //
-// DISPLAY CHARTS FOR THE REPORT PAGE
+// DISPLAY CHARTS FOR THE REPORT PAGE VIEW
 //
 //#############################################################################
 //#############################################################################
@@ -22,6 +22,7 @@ $(function(){
     $("#textPotionAverageBought").html("<p>In the average game a potion is purchased every <b>" + iDataAveragePotionB + "</b> waves.</p>");
     $("#textUpgradesGlyphs").html("<p>In an average game the a player buys <b>" + iDataUpgradesAvg  + "</b> upgrades and <b>" + iDataGlyphsAvg + "</b> glyphs.</p>");
     $("#allCharts").show();
+    stickyFooter();
 
 //#############################################################################
 // GAME COMPLETION
