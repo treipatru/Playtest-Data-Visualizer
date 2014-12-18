@@ -66,6 +66,8 @@ textarea {
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
     background: #ECF0F1;
+    margin:0;
+    padding:0;
 }
 
 .wrapper {
@@ -90,6 +92,16 @@ body {
 .footer-container,
 .main aside {
     background: #2C3E50;
+}
+
+#footer {
+    width:100%;
+    border-top: 5px solid #2980B9;
+    text-align: center;
+    background:#2C3E50;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.2em;
 }
 
 .title {
@@ -170,13 +182,13 @@ nav a:hover {
 INPUT STYLE AND FEEDBACK
 == */
 input[type="text"] {
-  margin: 0;
-  width: 15%;
-  padding-right: 10px; 
-  font-family: sans-serif;
-  appearance: none;
-  box-shadow: none;
-  border-radius: none;
+    margin: 0;
+    width: 15%;
+    padding-right: 10px; 
+    font-family: sans-serif;
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
 }
 input[type="text"]:focus {
   outline: none;
