@@ -79,6 +79,22 @@ function callback(value) {
     }
 }
 
+function stickyFooter(){
+    var bodyHeight = $("body").height();
+    var vwptHeight = $(window).height();
+    if (vwptHeight > bodyHeight) {
+        $("#footer").css("position","absolute").css("bottom",0);
+    }else{
+        $("#footer").css("position","").css("bottom","");
+    }
+}
+$(document).ready(function() {
+    stickyFooter();
+});
+$(window).resize(function() {
+    stickyFooter();
+});
+
 
 // TOGGLE ON/OFF CHARTS SECTIONS
 //-----------------------------------------------------------------------------
@@ -771,6 +787,10 @@ $(function(){
     fSetDateArray ();
     //DRAW THE REST OF THE FUCKING OWL
     fParseFilelist ();
+    //TOGGLE STATUS AND CHART BUTTON, MOVE FOOTER
+    $("#fileList").slideToggle("fast");
+    $("#showCharts").slideToggle("fast");
+    stickyFooter();
    }
   });
 });
