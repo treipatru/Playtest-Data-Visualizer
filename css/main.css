@@ -263,6 +263,17 @@ SEPARATOR STYLE
     text-align: center;
 }
 
+.separatorTitle {
+    margin-top: 1.5em;    
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-size: 2em;
+    padding: 0.5em 0 0.5em 0;
+    background: #E4E9EA;
+    color: #757575;
+    clear:both;
+}
+
 /* ==
 SECTION TITLES
 == */
@@ -289,6 +300,57 @@ SECTION TITLES
 
 #mapTitle {
     background-image: url("images/icn_Map.png");
+}
+
+
+/* ==
+REPORT SINGLE VIEW - SHOP UPGRADES
+== */
+
+.tableRow {
+    width: 100%;
+    clear:both;
+    border-bottom: 1px dotted gray;
+}
+
+.tableRowHead {
+    float:left;
+    padding-right: 1.5em;
+    text-align: center;
+    width: 2em;
+}
+
+.tableCol, .T1, .T2, .T3, .T4, .T5, .N {
+    float:left;
+    border-left: 1px dotted gray;
+    padding: 0 0.3em 0 0.3em;
+    width: 1em;
+    font-size: 0.9em;
+
+}
+
+.T1 {
+    background: #4D4D4D;
+}
+
+.T2 {
+    background: #5DA5DA;
+}
+
+.T3 {
+    background: #FAA43A;
+}
+
+.T4 {
+    background: #60BD68;
+}
+
+.T5 {
+    background: #F17CB0;
+}
+
+.N {
+    background: #FFFFFF;
 }
 
 /* ==========================================================================

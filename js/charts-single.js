@@ -9,9 +9,83 @@
 
 $(function(){
   $("#showChartsSingle").click(function(){
+    fCrunchData();
     $("#fileList , #singleTitle, #singleObjectSelector, #showChartsSingle").toggle("fast");
     $("#allCharts").show();
-    stickyFooter();
+    
+    //CHANGE SEPARATOR TITLE
+    $("#loadedObjTitle").removeClass().addClass('separatorTitle');
+    $("#loadedObjTitle").html("<p>" + oSelectedObject.id + "</p>");
+    
+    //WRITE GAME COMPLETION STATISTICS
+    $("#textShortestWave").html("<p>Fastest wave was completed in as little as <b>" + iDataShortestWave + "</b> seconds.</p>");
+    $("#textLongestWave").html("<p>Longest wave took <b>" + iDataLongestWave + "</b> seconds to finish.</p>");
+    $("#textGameTime").html("<p>The player has spent <b>" + iDataElapsedGameTimeS + "</b> seconds in game " + "(<b>" + iDataElapsedGameTimeM + "</b> minutes).</p>");
+    
+    //WRITE THE UPGRADES TABLE
+    $("#chartUpgradesHead, #chartUpgradesItems, #chartUpgradesGlyphs").find("p").remove();
+    $("#tableUpgradesVIT").append("<p class=\"tableRowHead\">VIT</p>");
+    $("#tableUpgradesSTR").append("<p class=\"tableRowHead\">STR</p>");
+    $("#tableUpgradesDEX").append("<p class=\"tableRowHead\">DEX</p>");
+    $("#tableUpgradesAGI").append("<p class=\"tableRowHead\">AGI</p>");
+    $("#tableUpgradesWave").append("<p class=\"tableRowHead\">W</p>");
+    for (i = 0; i < oSelectedObject.waveNo.length; i++) {
+        var sUpgradeType;
+        var sUpgradeTier;
+        //TEST FOR TIER
+        for (j = 0; j < oSelectedObject.upgrades[i].length; j++) {
+        if (/(T)1\w{3}/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeTier = "T1";
+        } else if (/(T)2\w{3}/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeTier = "T2";
+        } else if (/(T)3\w{3}/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeTier = "T3";
+        }  else if (/(T)4\w{3}/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeTier = "T4";
+        }  else if (/(T)5\w{3}/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeTier = "T5";
+        } else if (oSelectedObject.upgrades[i][j] === "None") {
+            sUpgradeTier = "N";
+        }
+    }
+    for (j = 0; j < oSelectedObject.upgrades[i].length; j++) {
+        if (/.{2}(STR)/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeType = "STRENGTH";
+        } else if (/.{2}(AGI)/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeType = "AGILITY";
+        } else if (/.{2}(DEX)/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeType = "DEXTERITY";
+        }  else if (/.{2}(VIT)/g.test(oSelectedObject.upgrades[i][j])) {
+            sUpgradeType = "VITALITY";
+        } else if (oSelectedObject.upgrades[i][j] === "None") {
+            sUpgradeType = "NONE";
+        }
+    }
+        var tempWaveNo = aDataMaxWave[i].slice(1,3);
+
+        if (sUpgradeType === "VITALITY") {
+            $("#tableUpgradesVIT").append("<p class=\"" + sUpgradeTier + "\">" + sUpgradeTier + "</p>");
+        } else {
+            $("#tableUpgradesVIT").append("<p class=\"N\">N</p>");
+        }
+        if (sUpgradeType === "STRENGTH") {
+            $("#tableUpgradesSTR").append("<p class=\"" + sUpgradeTier + "\">" + sUpgradeTier + "</p>");
+        } else {
+            $("#tableUpgradesSTR").append("<p class=\"N\">N</p>");
+        }
+        if (sUpgradeType === "DEXTERITY") {
+            $("#tableUpgradesDEX").append("<p class=\"" + sUpgradeTier + "\">" + sUpgradeTier + "</p>");
+        } else {
+            $("#tableUpgradesDEX").append("<p class=\"N\">N</p>");
+        }
+        if (sUpgradeType === "AGILITY") {
+            $("#tableUpgradesAGI").append("<p class=\"" + sUpgradeTier + "\">" + sUpgradeTier + "</p>");
+        } else {
+            $("#tableUpgradesAGI").append("<p class=\"N\">N</p>");
+        }
+
+        $("#tableUpgradesWave").append("<p class=\"tableCol\">" + tempWaveNo + "</p>");
+    }
 
 //#############################################################################
 // GAME COMPLETION
@@ -28,7 +102,7 @@ $('#chartTimePerWave').highcharts({
         type: 'column'
     },
     title: {
-        text: 'Average Time Elapsed Per Wave'
+        text: 'Time Elapsed Per Wave'
     },
 
     legend: {
@@ -112,10 +186,10 @@ $(function () {
             name: 'Attack Type',
             innerSize: '0%',
             data: [ //Add each type of attack and assign it to lower values - percentage coversion is automatic
-            ['Melee', iDataAttMeleeAvg],
-            ['Ch.Melee', iDataAttMeleeChAvg],
-            ['Range', iDataAttRangeAvg],
-            ['Ch.Range', iDataAttRangeChAvg],
+            ['Melee', iDataAttMeleeSum],
+            ['Ch.Melee', iDataAttMeleeChSum],
+            ['Range', iDataAttRangeSum],
+            ['Ch.Range', iDataAttRangeChSum],
             ]
         }]
     });
@@ -153,8 +227,8 @@ $(function () {
             type: 'pie',
             name: 'Time spent',
             data: [
-                ['Walking', iDataWalkTimeAvg],
-                ['Strafing', iDataStrafeTimeAvg]
+                ['Walking', iDataWalkTimeSum],
+                ['Strafing', iDataStrafeTimeSum]
                 ]
             }]
         });
@@ -202,16 +276,16 @@ $(function () {
         },
             series: [{//Each number is an average calculated per wave from all data sources
                 name: 'Melee',
-                data: aDataAttMelee
+                data: oSelectedObject.melee
             }, {
                 name: 'Charged Melee',
-                data: aDataAttMeleeCh
+                data: oSelectedObject.meleeCh
             }, {
                 name: 'Range',
-                data: aDataAttRange
+                data: oSelectedObject.range
             }, {
                 name: 'Charged Range',
-                data: aDataAttRangeCh
+                data: oSelectedObject.rangeCh
             }]
         });
 });
@@ -228,9 +302,200 @@ $(function () {
 
 
 
+// AVERAGE HEALTH LOST PER WAVE VS POTIONS AND REVIVES
+//-----------------------------------------------------------------------------
+$(function () {
+    $('#chartHealthAveragePotionsRevives').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'HP Lost Per Wave VS Use Of Potions And Revives'
+        },
+        xAxis: [{
+            categories: aDataMaxWave,
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            title: {
+                text: 'POTIONS/REVIVES',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true,
+            allowDecimals: false,
+            min: 0
+
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'HP Lost',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            }
+
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 100,
+            verticalAlign: 'top',
+            y: 40,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: 'HP Lost',
+            type: 'column',
+            yAxis: 1,
+            data: oSelectedObject.healthLost,
+        }, {
+            name: 'Potions',
+            type: 'spline',
+            yAxis: 0,
+            data: oSelectedObject.potionsUsed,
+            marker: {
+                enabled: false
+            },
+            dashStyle: 'shortdot',
+        }, {
+            name: 'Revives',
+            type: 'spline',
+            yAxis: 0,
+            data: oSelectedObject.revives
+        }]
+    });
+});
+
+
+
+
 //#############################################################################
 // COLLECTIBLES
 //#############################################################################
+
+
+
+
+
+// SOULS DROPPED VERSUS COLLECTED
+//-----------------------------------------------------------------------------
+$(function () {
+    $('#chartSoulsCollected').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Dropped/Collected Souls'
+        },
+        subtitle: {
+            text: null
+        },
+        xAxis: {
+            allowDecimals: false,
+        },
+        yAxis: {
+            title: {
+                text: 'No. Of Souls'
+            },
+        },
+        tooltip: {
+            shared: true,
+            pointFormat: '<b>{point.y:,.0f}</b> {series.name}<br/>'
+        },
+        plotOptions: {
+            area: {
+                marker: {
+                    enabled: true,
+                    symbol: 'circle',
+                    radius: 4,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Souls Dropped',
+            color: 'rgb(69, 96, 204)',
+            data: oSelectedObject.soulsDrop
+        }, {
+            name: 'Souls Collected',
+            color: 'rgb(50, 50, 50)',
+            data: oSelectedObject.soulsCol
+        }]
+    });
+});
+
+
+// SOULS DROPPED VERSUS COLLECTED
+//-----------------------------------------------------------------------------
+$(function () {
+    $('#chartShardsCollected').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Dropped/Collected Shards'
+        },
+        subtitle: {
+            text: null
+        },
+        xAxis: {
+            allowDecimals: false,
+        },
+        yAxis: {
+            title: {
+                text: 'No. Of Shards'
+            },
+        },
+        tooltip: {
+            shared: true,
+            pointFormat: '<b>{point.y:,.0f}</b> {series.name}<br/>'
+        },
+        plotOptions: {
+            area: {
+                marker: {
+                    enabled: true,
+                    symbol: 'circle',
+                    radius: 4,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Shards Dropped',
+            color: 'rgb(219, 179, 20)',
+            data: oSelectedObject.shardsDrop
+        }, {
+            name: 'Shards Collected',
+            color: 'rgb(50, 50, 50)',
+            data: oSelectedObject.shardsCol
+        }]
+    });
+});
 
 
 
@@ -242,8 +507,6 @@ $(function () {
 
 
 
-
-
-   fClearAllData();
+    stickyFooter();
 });
 });

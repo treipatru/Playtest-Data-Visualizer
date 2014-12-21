@@ -43,7 +43,8 @@ $(function() {
 
 
 function openNormalDialog() {
-    $("#confirmationDialog").html("Are you sure you want to re-index?" + "<br>" + "Make sure you have the correct files in the savedata folder before proceeding otherwise you might lose data!");
+    $("#confirmationDialog").html("Are you sure you want to re-index?" + "<br>" + 
+        "Make sure you have the correct files in the savedata folder before proceeding otherwise you might lose data!");
 
     // Define the Dialog and its properties.
     $("#confirmationDialog").dialog({
@@ -162,7 +163,6 @@ var oEndDate; //Date variable for the END datepicker
 var aFileListInput = []; //Array with exact names of files to be imported
 var aDatesList = []; //Array with all the days between start and end dates
 var aPlaytestFiles = []; //Used to import all files on server
-var aCompleteData = []; //Array containing all imported objects
 var sSelectedObject; //Name of selected data set
 var oSingleObject;
 
@@ -180,6 +180,23 @@ var aDataMaxWave = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10',
                     'W21','W22','W23','W24','W25','W26','W27','W28','W29','W30',
                     'W31', 'W32', 'W33', 'W34', 'W35', 'W36', 'W37', 'W38',
                     'W39', 'W40']; //Names of all possible waves
+
+//GAME TIME
+var iDataShortestWave = 0;
+var iDataLongestWave = 0;
+var iDataElapsedGameTimeS = 0;
+var iDataElapsedGameTimeM = 0;
+var iDataWalkTimeSum = 0;
+var iDataStrafeTimeSum = 0;
+
+//COMBAT DATA
+var iDataAttMeleeSum = 0; //Average no of Melee attacks
+var iDataAttMeleeChSum = 0; //Average no of MeleeCh attacks
+var iDataAttRangeSum = 0; //Average no of Range attacks
+var iDataAttRangeChSum = 0; //Average no of RangeCh attacks
+
+
+
 
 
 //#############################################################################
@@ -215,8 +232,7 @@ function fSetDateArray () {
 }
 
 
-// PARSE FILELIST AND COMPARE DATE SELECTION WITH FILES ON SERVER
-// LOAD ALL VALID FILES AS OBJECTS IN aCompleteData ARRAY
+// PARSE FILELIST, RETURN A LIST OF ITEMS AND 
 //-----------------------------------------------------------------------------
 
 
@@ -232,29 +248,32 @@ function fParseFilelist () {
         }
     }
 }
-    for (var k = 0; k < aFileListInput.length; k++) {
-        var fileName = "data/" + aFileListInput[k];
-        var objectName = fileName;
-        $.ajax({
-            url: fileName,
-            async: false,
-            dataType: 'json',
-            success: function (response) {
-                objectName = response;
-                aCompleteData.push(objectName);
-            }
-        });
-    }
+
     //RETURN INFORMATION TO INTERFACE
-    if ( aCompleteData[0] === undefined) {
+    if ( aFileListInput[0] === undefined) {
         fOutputLog ("nodataloaded");
         return;
     } else {
         fOutputLog ("dataloadsuccessful");
-        fCrunchData ();
     }
 
 });
+}
+
+// USE THE SELECTED OBJECT STRING AND RETRIEVE THAT INTO AN OBJECT
+//-----------------------------------------------------------------------------
+
+function fExtractData() {
+    sSelectedObject = "data/" + sSelectedObject;
+    $.ajax({
+        url: sSelectedObject,
+        async: false,
+        dataType: 'json',
+        success: function (response) {
+            oSelectedObject = response;
+            return oSelectedObject;
+        }
+    });
 }
 
 
@@ -274,10 +293,11 @@ function fOutputLog (situation) {
         $("#singleObjectSelector").find("option").remove();
         fHideUI();
     } else if (situation === "dataloadsuccessful") {
-       $("#debug").html("<p>" + aCompleteData.length + " data sets loaded!" + "</p>");
+       $("#debug").html("<p>" + aFileListInput.length + " data sets available!" + "</p>");
        $("#debug").removeClass().addClass('debugSuccess');
        $("#fileList").find("p").remove();
        $("#singleObjectSelector").find("option").remove();
+       $("#singleObjectSelector").append("<option disabled selected>-- select data set --</option>");
        for (i = 0; i < aFileListInput.length; i++) {
         $("#fileList").append("<p>" + aFileListInput[i] + "</p>");
         $("#singleObjectSelector").append("<option>" + aFileListInput[i] + "</option>");
@@ -322,6 +342,14 @@ function fCreateArrayZeroes () {
     return Array.apply(null, new Array(iMaxNrOfWaves)).map(Number.prototype.valueOf,0);
 }
 
+function fSumArray (numArray) {
+    var sum = 0;
+    for (i = 0; i < numArray.length; i++) {
+        sum += numArray[i];
+    }
+    return sum;
+}
+
 //#############################################################################
 // COMPUTE DATA REQUIRED FOR THE CHARTS
 //#############################################################################
@@ -333,30 +361,45 @@ function fCreateArrayZeroes () {
 function fCrunchData () {
 
 
-// RUN THROUGH EACH LOADED OBJECT AND EXTRACT DATA
+// SET MAXIMUM WAVE NUMBER
 //-------------------------------------------------------------------------
 
+    aDataMaxWave = aDataMaxWave.slice(0, oSelectedObject.waveNo.length);
 
-    for (var i = 0; i < aCompleteData.length; i++) {
+// GET GAME TIMES
+//-------------------------------------------------------------------------
 
-        //GET GAME IDS
-        aDataIds.push(aCompleteData[i].id); 
-    }
+    iDataShortestWave = getMinOfArray(oSelectedObject.elapsedTime);
+    iDataLongestWave = getMaxOfArray(oSelectedObject.elapsedTime);
+    iDataElapsedGameTimeS = fSumArray(oSelectedObject.elapsedTime);
+    iDataElapsedGameTimeM = Math.floor(iDataElapsedGameTimeS / 60);
+    iDataStrafeTimeSum = Math.floor(fSumArray(oSelectedObject.strafeTime));
+    iDataWalkTimeSum = iDataElapsedGameTimeS - iDataStrafeTimeSum;
 
-    //CLEAR IMPORT DATA TO ALLOW RESELECT OF DATA WITHOUT REFRESH
-    aFileListInput = [];
-    aDatesList = [];
-    aPlaytestFiles = [];
-    aCompleteData = [];
+// GET ATTACK USAGE
+//-------------------------------------------------------------------------
+
+    iDataAttMeleeSum = Math.floor(fSumArray(oSelectedObject.melee));
+    iDataAttMeleeChSum = Math.floor(fSumArray(oSelectedObject.meleeCh));
+    iDataAttRangeSum = Math.floor(fSumArray(oSelectedObject.range));
+    iDataAttRangeChSum = Math.floor(fSumArray(oSelectedObject.rangeCh));
+
+// GET ATTACK USAGE
+//-------------------------------------------------------------------------
+
+    fClearAllData (); //EMPTY VALUES
 }
 
 
-// CLEAR ALL DATA FROM MEMORY TO ALLOW REIMPORT
+// CLEAR DATA TO ALLOW REIMPORT WITHOUT PAGE REFRESH
 //-------------------------------------------------------------------------
 
 
 function fClearAllData () {
     aDataIds = [];
+    aFileListInput = [];
+    aDatesList = [];
+    aPlaytestFiles = [];
 }
 
 
@@ -379,6 +422,8 @@ $(function(){
     fOutputLog ("noinput");
     return;
    } else {
+    //MAKE SURE THE ARRAY OF FILES IS EMPTY
+    aFileListInput = [];
     fSetDateArray ();
     //DRAW THE REST OF THE FUCKING OWL
     fParseFilelist ();
@@ -388,23 +433,3 @@ $(function(){
    }
   });
 });
-
-
-// DEFINE FUNCTION TO BE CALLED WHEN AN ITEM IS SELECTED IN THE OBJECT SELECTOR
-//-----------------------------------------------------------------------------
-
-
-function fExtractData() {
-    sSelectedObject = "data/" + sSelectedObject;
-    $.ajax({
-        url: sSelectedObject,
-        async: false,
-        dataType: 'json',
-        success: function (response) {
-            oSelectedObject = response;
-            return oSelectedObject;
-        }
-    });
-
-    aDataMaxWave = aDataMaxWave.slice(0, oSelectedObject.waveNo.length);
-}
