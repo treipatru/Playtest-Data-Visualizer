@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Playtest Data</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' type='image/x-icon' href='favicon.ico' />
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/vendor/jquery-1.11.1.min.js"></script>
+        <script src="js/vendor/jquery-ui.js"></script>
+        <script src="js/highcharts/highcharts.js"></script>
+        <script src="js/highcharts/modules/exporting.js"></script>
+        <script src="js/highcharts/modules/funnel.js"></script>
+        <script src="js/highcharts/themes/grid-light.js"></script>
+        <script src="js/main-report.js"></script>
+        <script src="js/charts-report.js"></script>
+
+    </head>
+    <body>
+        <div class="header-container">
+        <div id="superHeader"></div>
+            <header class="wrapper clearfix">
+                <a href="index.html"><h1 class="title">Data Visualizer</h1></a>
+                <nav>
+                    <ul>
+                        <li class="activePage"><a href="report.html">Report</a></li>
+                        <li><a href="single.html">Single</a></li>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a href="#" id="reIndex">Re-Index</a></li>
+                        <div id="confirmationDialog"></div>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                    <section>
+                        <h3>Report View - Select Time Frame</h3>
+                        <input type="text" id="datePickStart" placeholder="Start Date">
+                        <input type="text" id="datePickEnd" placeholder="End Date">
+                        <button type="button" id="dataValidation">Load Data</button>
+                        <div id="debug"></div>
+                        <div id="fileList" class="hidden"></div>
+                        <button type="button" id="showCharts" class="hidden" style="width:100%">Beam me up, Scotty!</button>
+                        <div class="separator"><p>//</p></div>
+                    </section>
+                </article>
+
+                <article style="display:none" id="allCharts">
+                    <section>
+                    <h2 id="gameCompletionTitle">Game Completion</h2>
+                    <div id="chartWaveCompletion" class="chartContainer" style="width:100%; height:300px;"></div>
+                    <div id="chartWavePyramid" class="chartContainer" style="width:50%; height:400px;float:right;"></div>
+                    <div id="infoWaveCompletion" class="infoText" style="width:50%;float:left;height:400px;">
+                        <div id="textGameLength" style="padding-top:150px;"></div>
+                        <br>
+                        <div id="textGameAverage"></div>
+                    </div>
+                    <div id="chartWaveTime" class="chartContainer" style="width:100%; height:300px;clear:both;"></div>
+                    <div id="infoGametimeStats" class="infoText">
+                        <div id="textWavesLong"></div>
+                        <div id="textWavesShort"></div>
+                        <div id="textAverageWave"></div>
+                    </div>
+                    </section>
+                    <div class="separator"><p>//</p></div>
+                    <section>
+                    <h2 id="combatStatisticsTitle">Combat Statistics</h2>
+                    <div id="chartAttackTypes" class="chartContainer" style="width:50%; height:300px;float:left;"></div>
+                    <div id="chartWalkingStrafing" class="chartContainer" style="width:50%; height:300px;float:right;"></div>
+                    <div id="chartAttackTypesPerWave" class="chartContainer" style="width:100%; height:400px;clear:both;"></div>
+                    </section>
+                    <div class="separator"><p>//</p></div>
+                    <section>
+                    <h2 id="healthProgressionTitle">Health Progression</h2>
+                    <div id="chartHealthPlot" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartHealthAveragePotionsRevives" class="chartContainer" style="width:100%; height:400px;"></div>
+                    </section>
+                    <div class="separator"><p>//</p></div>
+                    <section>
+                    <h2 id="collectiblesTitle">Collectibles</h2>
+                    <div id="chartSoulsCollection" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartShardsCollection" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartAverageSoulsShards" class="chartContainer" style="width:100%; height:400px;"></div>
+                    </section>
+                    <div class="separator"><p>//</p></div>
+                    <section>
+                    <h2 id="shopTitle">Shop Statistics</h2>
+                    <div id="chartShopUpgrades" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="chartShopGlyphs" class="chartContainer" style="width:100%; height:400px;"></div>
+                    <div id="infoShopStats" class="infoText" style="width:50%;float:left;height:500px">
+                        <div id="textPotionsInGames"style="padding-top:125px;"></div>
+                        <br>
+                        <div id="textPotionAverageBought"></div>
+                        <br>
+                        <div id="textUpgradesGlyphs"></div>
+                    </div>
+                    <div id="chartShopPotions" class="chartContainer" style="width:50%;height:500px;float:right;"></div>
+                    </section>
+                    <div class="separator"><p>//</p></div>
+                    <!-- <section>
+                    <h2 id="mapTitle">Map</h2>
+                    <div id="chartMapHeatMap" class="chartContainer" style="width:100%; height:400px;"></div>
+                    </section> -->
+                </article>
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+        <div id="footer">
+        <h6>Playtest Data Viewer - Curse of Mermos - Gaming Academy 2014-2015 </h6>
+        </div>
+    </body>
+</html>

@@ -315,7 +315,10 @@ function fParseFilelist () {
     if ( aCompleteData[0] === undefined) {
         fOutputLog ("nodataloaded");
         return;
-    } else {
+    } else if ( aCompleteData.length > 500) {
+        fOutputLog ("toomuchdata");
+        return;
+    } else if ( aCompleteData.length <= 500){
         fOutputLog ("dataloadsuccessful");
         fCrunchData ();
     }
@@ -332,10 +335,16 @@ function fOutputLog (situation) {
     if (situation === "noinput") {
         $("#debug").html("<p>" + "You must select two dates to validate." + "</p>");
         $("#debug").removeClass().addClass('debugFail');
+        aCompleteData = [];
         return;
     } else if (situation === "nodataloaded") {
         $("#debug").html("<p>" + "No data was loaded!" + "</p>");
         $("#debug").removeClass().addClass('debugFail');
+        aCompleteData = [];
+    } else if (situation === "toomuchdata") {
+        $("#debug").html("<p>" + "More than 500 data sets loaded. Report will not render properly!" + "</p>");
+        $("#debug").removeClass().addClass('debugFail');
+        aCompleteData = [];
     } else if (situation === "dataloadsuccessful") {
        $("#debug").html("<p>" + aCompleteData.length + " data sets loaded!" + "</p>");
        $("#debug").removeClass().addClass('debugSuccess');
