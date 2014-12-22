@@ -112,31 +112,20 @@ $(function(){
     });
     
     $("#gameCompletionTitle").click(function(){
-        $("#chartWaveCompletion").slideToggle("fast");
-        $("#infoWaveCompletion").slideToggle("fast");
-        $("#chartWaveTime").slideToggle("fast");
-        $("#chartWavePyramid").slideToggle("fast");
-        $("#infoGametimeStats").slideToggle("fast");
+        $("#chartTimePerWave, #infoGametimeStats").slideToggle("fast");
     });
     $("#combatStatisticsTitle").click(function(){
-        $("#chartAttackTypes").slideToggle("fast");
-        $("#chartWalkingStrafing").slideToggle("fast");
-        $("#chartAttackTypesPerWave").slideToggle("fast");
+        $("#chartAttackTypes, #chartWalkingStrafing, #chartAttackTypesPerWave").slideToggle("fast");
     });
     $("#healthProgressionTitle").click(function(){
         $("#chartHealthPlot").slideToggle("fast");
         $("#chartHealthAveragePotionsRevives").slideToggle("fast");
     });
     $("#collectiblesTitle").click(function(){
-        $("#chartSoulsCollection").slideToggle("fast");
-        $("#chartShardsCollection").slideToggle("fast");
-        $("#chartAverageSoulsShards").slideToggle("fast");
+        $("#chartSoulsCollected, #chartShardsCollected").slideToggle("fast");
     });
     $("#shopTitle").click(function(){
-        $("#chartShopPotions").slideToggle("fast");
-        $("#chartShopUpgrades").slideToggle("fast");
-        $("#chartShopGlyphs").slideToggle("fast");
-        $("#infoShopStats").slideToggle("fast");
+        $("#upgradesTableTitle, #tableUpgrades, #chartPotionsPerWave, #infoShopStats").slideToggle("fast");
     });
     $("#mapTitle").click(function(){
         $("#chartMapHeatMap").slideToggle("fast");
@@ -180,6 +169,7 @@ var aDataMaxWave = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10',
                     'W21','W22','W23','W24','W25','W26','W27','W28','W29','W30',
                     'W31', 'W32', 'W33', 'W34', 'W35', 'W36', 'W37', 'W38',
                     'W39', 'W40']; //Names of all possible waves
+var aDataObjWave = [];
 
 //GAME TIME
 var iDataShortestWave = 0;
@@ -194,6 +184,13 @@ var iDataAttMeleeSum = 0; //Average no of Melee attacks
 var iDataAttMeleeChSum = 0; //Average no of MeleeCh attacks
 var iDataAttRangeSum = 0; //Average no of Range attacks
 var iDataAttRangeChSum = 0; //Average no of RangeCh attacks
+
+//SHOP DATA
+var aDataShopVIT = [];
+var aDataShopSTR = [];
+var aDataShopDEX = [];
+var aDataShopAGI = [];
+var iDataTotalPotionsB = 0;
 
 
 
@@ -364,7 +361,7 @@ function fCrunchData () {
 // SET MAXIMUM WAVE NUMBER
 //-------------------------------------------------------------------------
 
-    aDataMaxWave = aDataMaxWave.slice(0, oSelectedObject.waveNo.length);
+    aDataObjWave = aDataMaxWave.slice(0, oSelectedObject.waveNo.length);
 
 // GET GAME TIMES
 //-------------------------------------------------------------------------
@@ -384,8 +381,10 @@ function fCrunchData () {
     iDataAttRangeSum = Math.floor(fSumArray(oSelectedObject.range));
     iDataAttRangeChSum = Math.floor(fSumArray(oSelectedObject.rangeCh));
 
-// GET ATTACK USAGE
-//-------------------------------------------------------------------------
+//GET TOTAL NUMBER OF POTIONS
+
+    iDataTotalPotionsB = Math.floor(fSumArray(oSelectedObject.potionsBought));
+
 
     fClearAllData (); //EMPTY VALUES
 }
