@@ -14,21 +14,21 @@
         <script src="js/vendor/jquery-ui.js"></script>
         <script src="js/highcharts/highcharts.js"></script>
         <script src="js/highcharts/modules/exporting.js"></script>
-        <script src="js/highcharts/modules/heatmap.js"></script>
         <script src="js/highcharts/modules/funnel.js"></script>
         <script src="js/highcharts/themes/grid-light.js"></script>
         <script src="js/main-single.js"></script>
         <script src="js/charts-single.js"></script>
+
     </head>
     <body>
         <div class="header-container">
         <div id="superHeader"></div>
             <header class="wrapper clearfix">
-                <h1 class="title">Playtest Data</h1>
+                <a href="index.html"><h1 class="title">Data Visualizer</h1></a>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Report</a></li>
-                        <li><a href="single.html">Single</a></li>
+                        <li><a href="report.html">Report</a></li>
+                        <li class="activePage"><a href="single.html">Single</a></li>
                         <li><a href="help.html">Help</a></li>
                         <li><a href="#" id="reIndex">Re-Index</a></li>
                         <div id="confirmationDialog"></div>
@@ -52,37 +52,64 @@
                         <select id="singleObjectSelector" class="hidden" style="display:in-line;width:35%;">
                         </select>
                         <button type="button" id="showChartsSingle" class="hidden" style="display:in-line;width:64%;">Beam me up, Scotty!</button>
+                        <hr>
                         <div class="separator" id="loadedObjTitle"><p>//</p></div>
                     </section>
                 </article>
 
                 <article style="display:none" id="allCharts">
                     <section>
-                    <h2 id="gameCompletionTitle">Game Completion</h2>
-                    <div id="chartTimePerWave" class="chartContainer" style="width:100%; height:300px;"></div>
+                        <h2 id="gameCompletionTitle">Game Completion</h2>
+                        <div id="chartTimePerWave" class="chartContainer" style="width:100%; height:300px;"></div>
+                        <div id="infoGametimeStats" class="infoText">
+                            <div id="textShortestWave"></div>
+                            <div id="textLongestWave"></div>
+                            <div id="textGameTime"></div>
+                        </div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
-                    <h2 id="combatStatisticsTitle">Combat Statistics</h2>
+                        <h2 id="combatStatisticsTitle">Combat Statistics</h2>
+                        <div id="chartAttackTypes" class="chartContainer" style="width:50%; height:300px;float:left;"></div>
+                        <div id="chartWalkingStrafing" class="chartContainer" style="width:50%; height:300px;float:right;"></div>
+                        <div id="chartAttackTypesPerWave" class="chartContainer" style="width:100%; height:400px;clear:both;"></div>
+                    </section>
+                        <div class="separator"><p>//</p></div>
+                    <section>
+                        <h2 id="healthProgressionTitle">Health Progression</h2>
+                        <div id="chartHealthAveragePotionsRevives" class="chartContainer" style="width:100%; height:400px;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
-                    <h2 id="healthProgressionTitle">Health Progression</h2>
+                        <h2 id="collectiblesTitle">Collectibles</h2>
+                        <div id="chartSoulsCollected" class="chartContainer" style="width:100%; height:400px;"></div>
+                        <div id="chartShardsCollected" class="chartContainer" style="width:100%; height:400px;"></div>
                     </section>
                     <div class="separator"><p>//</p></div>
                     <section>
-                    <h2 id="collectiblesTitle">Collectibles</h2>
-                    </section>
-                    <div class="separator"><p>//</p></div>
-                    <section>
-                    <h2 id="shopTitle">Shop Statistics</h2>
+                        <h2 id="shopTitle">Shop Statistics</h2>
+                        <h3 id="upgradesTableTitle">UPGRADES AND GLYPHS</h3>
+                        <div id="tableUpgrades">
+                            <div id="tableUpgradesVIT" class="tableRow"></div>
+                            <div id="tableUpgradesSTR" class="tableRow"></div>
+                            <div id="tableUpgradesDEX" class="tableRow"></div>
+                            <div id="tableUpgradesAGI" class="tableRow"></div>
+                            <div id="tableUpgradesWave" class="tableRow"></div>
+                            <div id="tableGlyphsVIT" class="tableRow"></div>
+                            <div id="tableGlyphsSTR" class="tableRow"></div>
+                            <div id="tableGlyphsMIS" class="tableRow"></div>
+                        </div>
+                        <div id="chartPotionsPerWave" class="chartContainer" style="width:100%; height:300px;clear:both;"></div>
+                        <div id="infoShopStats" class="infoText">
+                            <div id="textPotionsBought"></div>
+                        </div>
                     </section>
                     <div class="separator"><p>//</p></div>
                 </article>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
         <div id="footer">
-        <h6>Playtest Data Viewer - Curse of Mermos - Gaming Academy 2014 </h6>
+        <h6>Playtest Data Viewer - Curse of Mermos - Gaming Academy 2014-2015 </h6>
         </div>
     </body>
 </html>
