@@ -20,7 +20,7 @@ $(function(){
     //SHOP GAME STATISTICS (TEXT)
     $("#textPotionsInGames").html("<p>In " + aDataIds.length + " games," + " a total of <b>" + iDataTotalPotionsB + "</b> potions have been bought and <b>" + iDataTotalPotionsU + "</b> used (not including free ones).</p>");
     $("#textPotionAverageBought").html("<p>In the average game a potion is purchased every <b>" + iDataAveragePotionB + "</b> waves.</p>");
-    $("#textUpgradesGlyphs").html("<p>In an average game the a player buys <b>" + iDataUpgradesAvg  + "</b> upgrades and <b>" + iDataGlyphsAvg + "</b> glyphs.</p>");
+    $("#textUpgradesGlyphs").html("<p>In an average game the average player buys <b>" + iDataUpgradesAvg  + "</b> upgrades and <b>" + iDataGlyphsAvg + "</b> glyphs.</p>");
     $("#allCharts").show();
     stickyFooter();
 
