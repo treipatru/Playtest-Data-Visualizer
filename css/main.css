@@ -178,6 +178,30 @@ nav a:hover {
     height:30px;
 }
 
+.singleView {
+    margin-top: 4em;
+    margin-bottom: 4em;
+    width:50%;
+    float:left;
+    text-align:center;
+    color:black;
+}
+h1 a {
+    text-decoration: none;
+}
+.singleView:hover {
+    background: #FFFFFF;
+}
+
+.singleView a:link, a:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.activePage{
+    font-size: 1.9em;
+}
+
 /* ==
 INPUT STYLE AND FEEDBACK
 == */
@@ -197,6 +221,10 @@ input[type="text"]:focus {
 #debug {
     display:inline;
     padding: 2px 0px 2px 30px;
+}
+
+.debugSuccess:hover {
+    cursor: pointer;
 }
 .debugSuccess {
     background-image: url("images/ok.png");
@@ -307,6 +335,16 @@ SECTION TITLES
 REPORT SINGLE VIEW - SHOP UPGRADES
 == */
 
+#tableUpgrades {
+    width:100%;
+    padding-bottom: 4em;
+}
+
+#upgradesTableTitle {
+    text-align: center;
+    padding: 1em 0 1em 0;
+}
+
 .tableRow {
     width: 100%;
     clear:both;
@@ -324,13 +362,14 @@ REPORT SINGLE VIEW - SHOP UPGRADES
     float:left;
     border-left: 1px dotted gray;
     padding: 0 0.3em 0 0.3em;
-    width: 1em;
+    width: 2%;
     font-size: 0.9em;
 
 }
 
 .T1 {
     background: #4D4D4D;
+    color: #E3E3E3;
 }
 
 .T2 {
@@ -351,6 +390,7 @@ REPORT SINGLE VIEW - SHOP UPGRADES
 
 .N {
     background: #FFFFFF;
+    color: #E3E3E3;
 }
 
 /* ==========================================================================
@@ -378,6 +418,10 @@ REPORT SINGLE VIEW - SHOP UPGRADES
 
     nav li:last-child a {
         margin-right: 0;
+    }
+
+    h1 a {
+        text-decoration: none;
     }
 
 /* ========================
