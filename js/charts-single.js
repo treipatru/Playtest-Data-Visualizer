@@ -2,6 +2,7 @@
 //#############################################################################
 //
 // DISPLAY CHARTS FOR THE SINGLE VIEW PAGE
+// andrei@planet34.org
 //
 //#############################################################################
 //#############################################################################
@@ -24,8 +25,6 @@ $(function(){
 
     //WRITE SHOP STATISTICS
     $("#textPotionsBought").html("<p>The player has bought a total of <b>" + iDataTotalPotionsB + "</b> potions</p>");
-    
-    //WRITE THE UPGRADES TABLE
 
 
 //#############################################################################
@@ -513,9 +512,9 @@ $(function () {
     for (j = 0; j < oSelectedObject.glyphBought[i].length; j++) {
         if (/(STR)\d{2}/g.test(oSelectedObject.glyphBought[i][j])) {
             sGlyphType = "STRENGTH";
-        } else if (/(STR)\d{2}/g.test(oSelectedObject.glyphBought[i][j])) {
+        } else if (/(VIT)\d{2}/g.test(oSelectedObject.glyphBought[i][j])) {
             sGlyphType = "VITALITY";
-        } else if (/(STR)\d{2}/g.test(oSelectedObject.glyphBought[i][j])) {
+        } else if (/(MIS)\d{2}/g.test(oSelectedObject.glyphBought[i][j])) {
             sGlyphType = "MISCELLANEOUS";
         } else if (oSelectedObject.glyphBought[i][j] === "None") {
             sGlyphType = "NONE";
@@ -603,7 +602,7 @@ $('#chartPotionsPerWave').highcharts({
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b> {point.y} seconds</b></td></tr>',
+            '<td style="padding:0"><b> {point.y} </b></td></tr>',
             footerFormat: '</table>',
             useHTML: true
         },
@@ -614,7 +613,7 @@ $('#chartPotionsPerWave').highcharts({
             }
         },
         series: [{ //Average of time elapsed of all waves/objects
-            name: 'Time Elapsed',
+            name: 'Potions Bought',
             color: Highcharts.getOptions().colors[4],
             data: oSelectedObject.potionsBought
 
