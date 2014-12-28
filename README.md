@@ -8,7 +8,7 @@
 
 ### What do I need to run it? ###
 
-The serverside file processing is done using a BASH script (not included in the repo) and the web part is using mainly JavaScript. I've also used the following libraries and resources:
+The serverside file processing is done with a BASH script (not included in the repo) and the web part is HTML/CSS/JavaScript. I've also used the following libraries and resources:
 
 * [HTML 5 Boilerplate](http://html5boilerplate.com/)
 * [jQuery](http://www.indiedb.com/games/curse-of-mermos1)
@@ -39,6 +39,7 @@ Also consider that each data set is a separate http request from the server. Alt
 3. ???
 4. Profit!
 
+If after you re-index the data you don't see the new data sets you might need to clear your browser cache.
 
 ### Contribution ###
 
@@ -47,7 +48,7 @@ This probably won't be of use for another project as it uses very specific data 
 
 ### Who do I talk to? ###
 
-Made by Andrei TreiPatru. [Say hi!](mailto:andrei@planet34.org).
+Made by Andrei TreiPatru. [Say hi!](mailto:andrei@planet34.org)
 
 ### License ###
 Playtest Data Visualizer is licensed under an  MIT license.
