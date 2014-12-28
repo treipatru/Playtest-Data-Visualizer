@@ -1,0 +1,20 @@
+{
+	"id":"daedfxucjm5#1",
+	"waveNo":[1,2,3,4,5,6,7,8],
+	"soulsDrop":[20,36,70,62,125,283,51,222],
+	"soulsCol":[20,36,69,60,125,283,51,221],
+	"shardsDrop":[0,0,0,0,0,0,1,1],
+	"shardsCol":[0,0,0,0,0,0,1,1],
+	"healthLost":[57,36,45,71,92,226,64,169],
+	"potionsUsed":[1,0,1,1,1,2,1,1],
+	"revives":[0,0,0,0,0,0,0,0],
+	"upgrades":[["None"],["None"],["T1STR"],["T1AGI"],["T1VIT"],["None"],["T2STR"],["None"]],
+	"potionsBought":[0,0,0,1,0,3,2,1],
+	"glyphBought":[["None"],["None"],["None"],["None"],["None"],["None"],["None"],["None"]],
+	"melee":[49,40,69,34,51,114,30,52],
+	"meleeCh":[0,0,0,0,0,0,2,8],
+	"range":[15,40,58,58,0,90,12,35],
+	"rangeCh":[0,0,0,0,0,0,0,0],
+	"strafeTime":[20,0,0,0,2,11,0,0],
+	"elapsedTime":[47,42,60,51,78,122,67,123]
+}
