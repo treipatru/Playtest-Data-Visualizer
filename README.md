@@ -2,7 +2,7 @@
 
 * The Data Visualizer is a data analysis web tool.
 * It takes as input JSON files saved by [Curse of Mermos](http://www.indiedb.com/games/curse-of-mermos1) at the end of a play session.
-* The tool is designed to work with small amounts of data at once; no more than 500 can be selected at the same time.
+* The tool is designed to work with small amounts of data at once; no more than 500 can be viewed at the same time.
 * Because of the limited quantity of data, the tool is doing all the processing locally, in the browser. If a lot of files are loaded you might notice a bit of lag on import.
 * Keep in mind that it is meant to be run in the studio LAN so by design it is not very network efficient.
 
