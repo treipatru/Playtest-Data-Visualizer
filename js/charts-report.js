@@ -2,6 +2,7 @@
 //#############################################################################
 //
 // DISPLAY CHARTS FOR THE REPORT PAGE VIEW
+// andrei@planet34.org
 //
 //#############################################################################
 //#############################################################################
@@ -320,7 +321,7 @@ $(function () {
     $('#chartHealthPlot').highcharts({
         chart: {
             type: 'scatter',
-            zoomType: 'xy'
+            zoomType: 'xy',
         },
         title: {
             text: 'Health Lost Per Wave Per Game'
@@ -366,7 +367,8 @@ $(function () {
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
                     pointFormat: 'Wave Number <b>{point.x}</b>, Lost <b>{point.y}</b> HP'
-                }
+                },
+                showInLegend: bDataShowLabels
             }
         },
         series: aDataHealthWaveGame
@@ -550,7 +552,8 @@ $(function () {
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
                     pointFormat: 'Wave Number {point.x}, Collected {point.y}% of souls'
-                }
+                },
+                showInLegend: bDataShowLabels
             }
         },
         series: aDataSoulsWaveGame
@@ -611,7 +614,8 @@ $(function () {
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
                     pointFormat: 'Wave Number {point.x}, Collected {point.y}% of shards'
-                }
+                },
+                showInLegend: bDataShowLabels
             }
         },
         series: aDataShardsWaveGame
