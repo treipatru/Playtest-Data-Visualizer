@@ -334,6 +334,7 @@ $(function () {
                 enabled: false,
                 text: 'Wave Number'
             },
+            max: 30,
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
@@ -518,6 +519,7 @@ $(function () {
                 enabled: false,
                 text: 'Wave Number'
             },
+            max: 30,
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
@@ -580,6 +582,7 @@ $(function () {
                 enabled: false,
                 text: 'Wave Number'
             },
+            max: 30,
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
