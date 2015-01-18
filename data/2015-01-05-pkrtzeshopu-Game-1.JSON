@@ -1,0 +1,20 @@
+{
+	"id":"pkrtzeshopu#1",
+	"waveNo":[1,2,3,4,5,6,7],
+	"soulsDrop":[20,36,70,62,125,283,51],
+	"soulsCol":[19,34,70,62,122,252,51],
+	"shardsDrop":[0,0,0,0,0,0,1],
+	"shardsCol":[0,0,0,0,0,0,1],
+	"healthLost":[33,15,18,8,39,77,27],
+	"potionsUsed":[2,0,0,0,2,0,1],
+	"revives":[0,0,0,0,0,0,0],
+	"upgrades":[["None"],["None"],["T1DEX"],["T1AGI"],["None"],["None"],["T2DEX"]],
+	"potionsBought":[0,0,0,0,0,2,1],
+	"glyphBought":[["None"],["None"],["None"],["None"],["None"],["None"],["None"]],
+	"melee":[20,4,0,0,2,0,0],
+	"meleeCh":[0,0,0,0,0,0,0],
+	"range":[43,88,124,94,141,262,25],
+	"rangeCh":[0,0,0,0,0,0,4],
+	"strafeTime":[16,30,41,35,36,67,15],
+	"elapsedTime":[43,73,104,72,78,128,46]
+}
