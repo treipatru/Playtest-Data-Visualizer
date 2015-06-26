@@ -48,7 +48,7 @@ This probably won't be of use for another project as it uses very specific data 
 
 ### Who do I talk to? ###
 
-Made by Andrei TreiPatru. [Say hi!](mailto:andrei@planet34.org)
+Made by treipatru. [Say hi!](mailto:andrei@planet34.org)
 
 ### License ###
 Playtest Data Visualizer is licensed under an  MIT license.
